@@ -8,6 +8,10 @@
     "typo3/cms-frontend": "^13.4",
     "typo3/cms-fluid-styled-content": "^13.4"
   },
+  "replace": {
+    "aistea/hero_sequenz": "self.version",
+    "aistea/lp_product_slider": "self.version"
+  },
   "autoload": {
     "psr-4": {
       "Aistea\\LpBuilder\\": "Classes/"
