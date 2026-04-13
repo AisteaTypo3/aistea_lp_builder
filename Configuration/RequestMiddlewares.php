@@ -16,8 +16,8 @@ return [
         'aistea/lp-builder-hero-sequence-endpoint' => [
             'target' => \Aistea\LpBuilder\Middleware\FramesEndpointMiddleware::class,
             'before' => [
+                'typo3/cms-frontend/site',
                 'typo3/cms-frontend/page-resolver',
-                'typo3/cms-frontend/tsfe',
             ],
         ],
     ],
