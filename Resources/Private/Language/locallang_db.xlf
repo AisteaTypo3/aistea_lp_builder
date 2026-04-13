@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2026-02-19T00:00:00Z" product-name="aistea_lp_builder">
+    <header/>
+    <body>
+      <trans-unit id="tt_content.CType.aistea_lp_product_slider"><source>LP Product Slider</source></trans-unit>
+      <trans-unit id="tt_content.CType.aistea_lp_product_slider.description"><source>Landingpage product slider with image, video and optional 3D stage.</source></trans-unit>
+      <trans-unit id="tt_content.CType.aistea_lp_horizontal_slider"><source>LP Horizontal Story Slider</source></trans-unit>
+      <trans-unit id="tt_content.CType.aistea_lp_horizontal_slider.description"><source>Horizontal visual slider with image, image sequence or one-shot video slides.</source></trans-unit>
+      <trans-unit id="tt_content.CType.aistea_lp_image_sequence"><source>LP Image Sequence</source></trans-unit>
+      <trans-unit id="tt_content.CType.aistea_lp_image_sequence.description"><source>Image-like content element that plays a sequence of images.</source></trans-unit>
+      <trans-unit id="tt_content.CType.aistea_lp_fullscreen_video"><source>LP Fullscreen Video</source></trans-unit>
+      <trans-unit id="tt_content.CType.aistea_lp_fullscreen_video.description"><source>Fullscreen short MP4 teaser with overlay and popup long Vimeo video.</source></trans-unit>
+      <trans-unit id="tt_content.CType.aistea_lp_before_after"><source>LP Before / After Slider</source></trans-unit>
+      <trans-unit id="tt_content.CType.aistea_lp_before_after.description"><source>Drag-handle image comparison with before and after states.</source></trans-unit>
+      <trans-unit id="tt_content.CType.aistea_lp_hotspot_image"><source>LP Hotspot Image</source></trans-unit>
+      <trans-unit id="tt_content.CType.aistea_lp_hotspot_image.description"><source>Image with clickable hotspot markers that reveal info panels.</source></trans-unit>
+      <trans-unit id="tt_content.CType.aistea_hero_sequenz"><source>Hero Image Sequence</source></trans-unit>
+      <trans-unit id="wizard.description"><source>Desktop image sequence animation based on a TYPO3 folder file collection.</source></trans-unit>
+      <trans-unit id="tabs.slides"><source>Slides</source></trans-unit>
+      <trans-unit id="tabs.media"><source>Media</source></trans-unit>
+      <trans-unit id="tabs.hotspots"><source>Hotspots</source></trans-unit>
+
+      <trans-unit id="tt_content.tx_aistealpproductslider_layout_mode"><source>Layout mode</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_breakpoint_mobile"><source>Mobile breakpoint (px)</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_reduced_motion_behavior"><source>Reduced motion behavior</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_video_autoplay_desktop"><source>Video autoplay desktop</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_video_autoplay_mobile"><source>Video autoplay mobile</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_preload_strategy"><source>Preload strategy</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_stage_aspect_ratio"><source>Stage aspect ratio</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_theme"><source>Theme</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_slides"><source>Slides</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_hslides"><source>Story slides</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_sequence_source"><source>Frame source</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_sequence_collection"><source>File collection</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_sequence_frames"><source>Sequence frames (file list)</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_sequence_fps"><source>Sequence FPS</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_sequence_loop"><source>Loop sequence</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_fsv_short_video"><source>Short video (MP4)</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_fsv_long_video"><source>Long video (Vimeo media asset)</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_fsv_kicker"><source>Overlay kicker</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_fsv_headline"><source>Overlay headline</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_fsv_button_label"><source>Button label</source></trans-unit>
+      <trans-unit id="sequence_source.filelist"><source>Manual file list</source></trans-unit>
+      <trans-unit id="sequence_source.collection"><source>TYPO3 file collection</source></trans-unit>
+
+      <trans-unit id="layout_mode.default"><source>Default</source></trans-unit>
+      <trans-unit id="layout_mode.compact"><source>Compact</source></trans-unit>
+      <trans-unit id="reduced_motion.static"><source>Static fallback only</source></trans-unit>
+      <trans-unit id="reduced_motion.allow_manual"><source>Allow manual play</source></trans-unit>
+      <trans-unit id="preload.none"><source>None</source></trans-unit>
+      <trans-unit id="preload.smart"><source>Smart</source></trans-unit>
+      <trans-unit id="preload.aggressive"><source>Aggressive</source></trans-unit>
+      <trans-unit id="theme.dark"><source>Dark</source></trans-unit>
+      <trans-unit id="theme.light"><source>Light</source></trans-unit>
+
+      <trans-unit id="tt_content.tx_aistealpproductslider_ba_image_before"><source>Before image</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_ba_image_after"><source>After image</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_ba_label_before"><source>Before label</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_ba_label_after"><source>After label</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_ba_initial_position"><source>Initial handle position (0–100)</source></trans-unit>
+
+      <trans-unit id="tt_content.tx_aistealpproductslider_hi_image"><source>Background image</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_hi_hotspots"><source>Hotspots</source></trans-unit>
+      <trans-unit id="tt_content.file_collection"><source>Frame file collection</source></trans-unit>
+      <trans-unit id="tt_content.desktop_fps"><source>Desktop FPS</source></trans-unit>
+      <trans-unit id="tt_content.desktop_loop"><source>Desktop loop</source></trans-unit>
+      <trans-unit id="tt_content.mobile_breakpoint"><source>Mobile breakpoint (px)</source></trans-unit>
+      <trans-unit id="tt_content.mobile_mode"><source>Mobile fallback mode</source></trans-unit>
+      <trans-unit id="tt_content.mobile_mode.lastFrame"><source>Last frame</source></trans-unit>
+      <trans-unit id="tt_content.mobile_mode.firstFrame"><source>First frame</source></trans-unit>
+      <trans-unit id="tt_content.mobile_mode.staticImage"><source>Static image</source></trans-unit>
+      <trans-unit id="tt_content.mobile_static_image"><source>Mobile static image</source></trans-unit>
+      <trans-unit id="tt_content.preload_strategy"><source>Preload strategy</source></trans-unit>
+      <trans-unit id="tt_content.preload_strategy.smart"><source>Smart</source></trans-unit>
+      <trans-unit id="tt_content.preload_strategy.all"><source>All</source></trans-unit>
+      <trans-unit id="tt_content.alt_text"><source>Alt text</source></trans-unit>
+      <trans-unit id="tt_content.background_color"><source>Background color</source></trans-unit>
+      <trans-unit id="tt_content.render_full_list_on_mobile"><source>Render full list on mobile (legacy)</source></trans-unit>
+
+      <trans-unit id="tx_aistealpproductslider_hotspot"><source>Hotspot</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_hotspot.title"><source>Title</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_hotspot.description"><source>Description</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_hotspot.pos_x"><source>Position X (%)</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_hotspot.pos_y"><source>Position Y (%)</source></trans-unit>
+
+      <trans-unit id="tx_aistealpproductslider_slide"><source>Product slider slide</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_slide.title"><source>Title</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_slide.bodytext"><source>Body text</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_slide.slide_type"><source>Slide type</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_slide.aria_label"><source>ARIA label</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_slide.media_image"><source>Image</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_slide.media_video"><source>MP4 video</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_slide.video_poster"><source>Video poster</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_slide.video_startframe"><source>Video start frame</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_slide.video_endframe"><source>Video end frame</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_slide.model_gltf"><source>3D model (GLB/GLTF)</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_slide.model_poster"><source>3D poster</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_slide.model_envmap"><source>3D environment map</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_slide.model_autorotate"><source>3D auto-rotate</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_slide.model_camera_preset"><source>3D camera preset</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_slide.model_bg_color"><source>3D background color</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_slide.color_variants"><source>Color variants (JSON)</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_hslide"><source>Horizontal story slide</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_hslide.title"><source>Internal title</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_hslide.headline"><source>Headline (optional)</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_hslide.slide_type"><source>Slide type</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_hslide.media_image"><source>Image</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_hslide.media_sequence"><source>Image sequence (ordered file list)</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_hslide.sequence_fps"><source>Sequence FPS</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_hslide.media_video"><source>Video (once)</source></trans-unit>
+
+      <trans-unit id="slide_type.image"><source>Image</source></trans-unit>
+      <trans-unit id="slide_type.video"><source>Video</source></trans-unit>
+      <trans-unit id="slide_type.model3d"><source>3D model</source></trans-unit>
+      <trans-unit id="slide_type.colorGallery"><source>Color gallery</source></trans-unit>
+      <trans-unit id="hslide_type.image"><source>Image</source></trans-unit>
+      <trans-unit id="hslide_type.sequence"><source>Image sequence</source></trans-unit>
+      <trans-unit id="hslide_type.video"><source>Video (once)</source></trans-unit>
+
+      <trans-unit id="camera.front"><source>Front</source></trans-unit>
+      <trans-unit id="camera.back"><source>Back</source></trans-unit>
+      <trans-unit id="camera.left"><source>Left</source></trans-unit>
+      <trans-unit id="camera.right"><source>Right</source></trans-unit>
+      <trans-unit id="camera.custom"><source>Custom</source></trans-unit>
+    </body>
+  </file>
+</xliff>

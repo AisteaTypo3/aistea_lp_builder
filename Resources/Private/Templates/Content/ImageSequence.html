@@ -1,0 +1,25 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:asset.css identifier="aistea-lp-image-sequence-css" href="EXT:aistea_lp_builder/Resources/Public/Css/lp-image-sequence.css" />
+<f:asset.script identifier="aistea-lp-image-sequence-js" src="EXT:aistea_lp_builder/Resources/Public/JavaScript/lp-image-sequence.js" defer="1" />
+
+<section class="aistea-is">
+  <f:if condition="{data.header}">
+    <header class="aistea-is__header">
+      <h3 class="aistea-is__title">{data.header}</h3>
+    </header>
+  </f:if>
+
+  <figure class="aistea-is__figure">
+    <canvas class="aistea-is__canvas" aria-hidden="true"></canvas>
+    <img
+      class="aistea-is__image"
+      src="{sequence.firstFrame}"
+      alt="{data.header}"
+      loading="lazy"
+      decoding="async"
+    />
+  </figure>
+
+  <script type="application/json" class="aistea-is__payload"><f:format.raw>{sequenceJson}</f:format.raw></script>
+</section>
+</html>

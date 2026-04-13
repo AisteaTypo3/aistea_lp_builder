@@ -1,0 +1,175 @@
+.aistea-hi {
+  position: relative;
+  padding: clamp(1rem, 2.4vw, 1.8rem) 0;
+  background: transparent;
+  overflow: hidden;
+  font-family: "SF Pro Display", "SF Pro Text", "Helvetica Neue", "Arial Nova", sans-serif;
+}
+
+.aistea-hi__stage {
+  position: relative;
+  display: block;
+  width: 100%;
+  line-height: 0;
+  overflow: hidden;
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(64, 116, 214, 0.14), transparent 36%),
+    linear-gradient(180deg, #050608 0%, #0a0d12 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.aistea-hi__stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.08), transparent 42%),
+    linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.24) 100%);
+  pointer-events: none;
+}
+
+.aistea-hi__image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.aistea-hi__dot {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.aistea-hi__dot-ring,
+.aistea-hi__dot-core {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+
+.aistea-hi__dot-ring {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.03);
+  animation: aistea-hi-pulse 2.8s ease-in-out infinite;
+}
+
+.aistea-hi__dot-core {
+  inset: 9px;
+  background: linear-gradient(180deg, #ffffff, #cad7e8);
+  box-shadow: 0 0 18px rgba(124, 184, 255, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.aistea-hi__dot:hover .aistea-hi__dot-core,
+.aistea-hi__dot.is-active .aistea-hi__dot-core {
+  transform: scale(1.12);
+  box-shadow: 0 0 26px rgba(124, 184, 255, 0.42);
+}
+
+.aistea-hi__dot.is-active .aistea-hi__dot-ring {
+  border-color: rgba(124, 184, 255, 0.32);
+  background: rgba(124, 184, 255, 0.08);
+  animation: none;
+}
+
+.aistea-hi__dot:focus-visible {
+  outline: 2px solid rgba(124, 184, 255, 0.4);
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+
+@keyframes aistea-hi-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+
+  50% {
+    transform: scale(1.35);
+    opacity: 0.34;
+  }
+}
+
+.aistea-hi__panel {
+  position: absolute;
+  z-index: 10;
+  width: min(280px, calc(100% - 2rem));
+  max-width: calc(100% - 2rem);
+  padding: 1rem;
+  padding-top: 2.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  background: rgba(10, 14, 22, 0.86);
+  color: #f3f7fd;
+  backdrop-filter: blur(18px);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.32);
+}
+
+.aistea-hi__panel-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  color: #f3f7fd;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
+}
+
+.aistea-hi__panel-close:hover,
+.aistea-hi__panel-close:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(124, 184, 255, 0.26);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.aistea-hi__panel-close svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.aistea-hi__panel-title {
+  margin: 0 0 0.45rem;
+  font-size: 1rem;
+  font-weight: 620;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.aistea-hi__panel-desc {
+  margin: 0;
+  color: #98a3b6;
+  font-size: 0.92rem;
+  line-height: 1.58;
+}
+
+@media (max-width: 720px) {
+  .aistea-hi {
+    padding: 0.8rem 0;
+  }
+
+  .aistea-hi__stage {
+    border-radius: 24px;
+  }
+
+  .aistea-hi__panel {
+    width: min(240px, calc(100% - 1.2rem));
+  }
+}

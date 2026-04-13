@@ -1,0 +1,102 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:asset.css identifier="aistea-lp-builder-css" href="EXT:aistea_lp_builder/Resources/Public/Css/lp-product-slider.css" />
+<f:asset.script identifier="aistea-lp-builder-js" src="EXT:aistea_lp_builder/Resources/Public/JavaScript/lp-product-slider.js" defer="1" />
+
+<section
+  class="aistea-pv aistea-pv--{data.tx_aistealpproductslider_theme} aistea-pv--{data.tx_aistealpproductslider_layout_mode}"
+  data-ce-uid="{data.uid}"
+  data-endpoint="{endpoint}"
+  data-breakpoint="{data.tx_aistealpproductslider_breakpoint_mobile}"
+  data-reduced-motion-behavior="{data.tx_aistealpproductslider_reduced_motion_behavior}"
+  data-video-autoplay-desktop="{data.tx_aistealpproductslider_video_autoplay_desktop}"
+  data-video-autoplay-mobile="{data.tx_aistealpproductslider_video_autoplay_mobile}"
+  data-preload-strategy="{data.tx_aistealpproductslider_preload_strategy}"
+  data-stage-aspect-ratio="{data.tx_aistealpproductslider_stage_aspect_ratio}"
+  data-three-url="{f:uri.resource(path:'JavaScript/Vendor/three.module.js', extensionName:'AisteaLpBuilder')}"
+  data-gltf-loader-url="{f:uri.resource(path:'JavaScript/Vendor/GLTFLoader.js', extensionName:'AisteaLpBuilder')}"
+>
+  <f:if condition="{data.header}">
+    <header class="aistea-pv__header">
+      <h2 class="aistea-pv__title">{data.header}</h2>
+    </header>
+  </f:if>
+
+  <div class="aistea-pv__grid">
+    <aside class="aistea-pv__controls" aria-label="Product views">
+      <div class="aistea-pv__controlsInner">
+        <div class="aistea-pv__tabNav" aria-label="Slide navigation">
+          <button type="button" class="aistea-pv__nav aistea-pv__nav--prev" aria-label="Previous slide">&#8593;</button>
+          <button type="button" class="aistea-pv__nav aistea-pv__nav--next" aria-label="Next slide">&#8595;</button>
+        </div>
+        <ul class="aistea-pv__tablist" role="tablist" aria-orientation="vertical">
+          <f:for each="{slides}" as="slide" iteration="it">
+            <li class="aistea-pv__tabitem" role="presentation">
+              <button
+                type="button"
+                id="aistea-pv-tab-{data.uid}-{slide.uid}"
+                class="aistea-pv__tab{f:if(condition: it.isFirst, then: ' is-active', else: '')}"
+                role="tab"
+                aria-selected="{f:if(condition: it.isFirst, then: 'true', else: 'false')}"
+                aria-controls="aistea-pv-panel-{data.uid}-{slide.uid}"
+                tabindex="{f:if(condition: it.isFirst, then: '0', else: '-1')}"
+                data-slide-uid="{slide.uid}"
+                data-slide-type="{slide.type}"
+                data-slide-title="{slide.title}"
+                data-slide-body="{slide.body -> f:format.stripTags()}"
+                data-slide-aria-label="{slide.ariaLabel}"
+                data-slide-fallback-image="{slide.fallbackImage}"
+              >
+                <span class="aistea-pv__tabLabel">{slide.title}</span>
+                <span class="aistea-pv__tabType">{slide.type}</span>
+              </button>
+            </li>
+          </f:for>
+        </ul>
+      </div>
+    </aside>
+
+    <div class="aistea-pv__stageWrap">
+      <div class="aistea-pv__stage" role="region" aria-live="polite" aria-atomic="true">
+        <div class="aistea-pv__stageMedia" id="aistea-pv-stage-{data.uid}">
+          <f:if condition="{slides.0.fallbackImage}">
+            <img
+              src="{slides.0.fallbackImage}"
+              alt="{slides.0.ariaLabel}"
+              class="aistea-pv__fallback"
+              loading="lazy"
+              decoding="async"
+            />
+          </f:if>
+        </div>
+        <div class="aistea-pv__loader" hidden aria-hidden="true">
+          <span class="aistea-pv__loaderDot" aria-hidden="true"></span>
+          <span class="aistea-pv__loaderText">Loading 3D model…</span>
+        </div>
+      </div>
+
+      <div class="aistea-pv__explainer" id="aistea-pv-panel-{data.uid}" aria-live="polite">
+        <f:if condition="{slides.0}">
+          <h3 class="aistea-pv__explainerTitle">{slides.0.title}</h3>
+          <div class="aistea-pv__explainerBody">
+            <f:format.html>{slides.0.body}</f:format.html>
+          </div>
+        </f:if>
+      </div>
+    </div>
+  </div>
+
+  <noscript>
+    <div class="aistea-pv__noscript">
+      <f:if condition="{slides.0.fallbackImage}">
+        <img src="{slides.0.fallbackImage}" alt="{slides.0.ariaLabel}" loading="lazy" decoding="async" />
+      </f:if>
+      <f:if condition="{slides.0.title}">
+        <h3>{slides.0.title}</h3>
+      </f:if>
+      <f:if condition="{slides.0.body}">
+        <f:format.html>{slides.0.body}</f:format.html>
+      </f:if>
+    </div>
+  </noscript>
+</section>
+</html>

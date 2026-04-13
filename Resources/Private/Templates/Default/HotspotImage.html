@@ -1,0 +1,49 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:asset.css identifier="aistea-lp-hotspot-image-css" href="EXT:aistea_lp_builder/Resources/Public/Css/lp-hotspot-image.css" />
+<f:asset.script identifier="aistea-lp-hotspot-image-js" src="EXT:aistea_lp_builder/Resources/Public/JavaScript/lp-hotspot-image.js" defer="1" />
+
+<section class="aistea-hi">
+  <div class="aistea-hi__stage">
+
+    <f:if condition="{hi.imageUrl}">
+      <img class="aistea-hi__image" src="{hi.imageUrl}" alt="" aria-hidden="true" />
+    </f:if>
+
+    <f:for each="{hi.hotspots}" as="hotspot" iteration="iter">
+      <button
+        type="button"
+        class="aistea-hi__dot"
+        style="left:{hotspot.x}%;top:{hotspot.y}%"
+        aria-expanded="false"
+        aria-controls="aistea-hi-panel-{data.uid}-{hotspot.uid}"
+        aria-label="{hotspot.title}"
+        data-index="{iter.index}"
+      >
+        <span class="aistea-hi__dot-ring" aria-hidden="true"></span>
+        <span class="aistea-hi__dot-core" aria-hidden="true"></span>
+      </button>
+    </f:for>
+
+    <f:for each="{hi.hotspots}" as="hotspot">
+      <div
+        id="aistea-hi-panel-{data.uid}-{hotspot.uid}"
+        class="aistea-hi__panel"
+        hidden
+        aria-hidden="true"
+        role="tooltip"
+      >
+        <button type="button" class="aistea-hi__panel-close" aria-label="Close">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M6 6L18 18M18 6L6 18"/>
+          </svg>
+        </button>
+        <p class="aistea-hi__panel-title">{hotspot.title}</p>
+        <f:if condition="{hotspot.description}">
+          <p class="aistea-hi__panel-desc">{hotspot.description}</p>
+        </f:if>
+      </div>
+    </f:for>
+
+  </div>
+</section>
+</html>

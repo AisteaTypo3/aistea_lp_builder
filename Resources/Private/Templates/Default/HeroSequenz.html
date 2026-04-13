@@ -1,0 +1,33 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:asset.css identifier="aistea-hero-sequenz" href="EXT:aistea_lp_builder/Resources/Public/Css/hero-sequenz.css" />
+<f:asset.script identifier="aistea-hero-sequenz" src="EXT:aistea_lp_builder/Resources/Public/JavaScript/hero-sequenz.js" />
+
+<div class="aistea-hero-sequenz-wrapper" style="--aistea-hero-bg:{heroSequenz.backgroundColor};--aistea-hero-aspect-ratio:{heroSequenz.aspectRatio};">
+    <figure class="aistea-hero-sequenz"
+        data-ce-uid="{heroSequenz.contentUid}"
+        data-endpoint="{heroSequenz.endpointUrl}"
+        data-fps="{heroSequenz.fps}"
+        data-loop="{heroSequenz.loop}"
+        data-breakpoint="{heroSequenz.breakpoint}"
+        data-preload="{heroSequenz.preloadStrategy}"
+        data-fallback="{heroSequenz.fallbackUrl}"
+        data-last="{heroSequenz.lastFrameUrl}">
+        <img class="aistea-hero-sequenz__image"
+            src="{heroSequenz.fallbackUrl}"
+            alt="{heroSequenz.altText}"
+            decoding="async"
+            loading="eager"
+            <f:if condition="{heroSequenz.width}">width="{heroSequenz.width}"</f:if>
+            <f:if condition="{heroSequenz.height}">height="{heroSequenz.height}"</f:if> />
+
+        <noscript>
+            <img class="aistea-hero-sequenz__image"
+                src="{heroSequenz.lastFrameUrl}"
+                alt="{heroSequenz.altText}"
+                loading="lazy"
+                <f:if condition="{heroSequenz.width}">width="{heroSequenz.width}"</f:if>
+                <f:if condition="{heroSequenz.height}">height="{heroSequenz.height}"</f:if> />
+        </noscript>
+    </figure>
+</div>
+</html>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+  <!-- Outer card -->
+  <rect x="4" y="6" width="56" height="52" rx="10" fill="#0F172A"/>
+
+  <!-- Left panel (before) -->
+  <rect x="8" y="10" width="22" height="44" rx="5" fill="#334155"/>
+  <!-- Landscape suggestion left -->
+  <rect x="11" y="13" width="16" height="20" rx="3" fill="#475569"/>
+  <!-- Mountain / hill shape left (darker) -->
+  <rect x="11" y="27" width="16" height="6" rx="2" fill="#1E293B"/>
+  <!-- Text lines left -->
+  <rect x="11" y="36" width="16" height="3" rx="1" fill="#475569"/>
+  <rect x="11" y="42" width="10" height="3" rx="1" fill="#475569"/>
+
+  <!-- Right panel (after) -->
+  <rect x="34" y="10" width="22" height="44" rx="5" fill="#1E293B"/>
+  <!-- Landscape suggestion right (brighter = "after") -->
+  <rect x="37" y="13" width="16" height="20" rx="3" fill="#94A3B8"/>
+  <!-- Mountain / hill shape right -->
+  <rect x="37" y="27" width="16" height="6" rx="2" fill="#CBD5E1"/>
+  <!-- Text lines right -->
+  <rect x="37" y="36" width="16" height="3" rx="1" fill="#475569"/>
+  <rect x="37" y="42" width="10" height="3" rx="1" fill="#475569"/>
+
+  <!-- Divider line -->
+  <rect x="30" y="10" width="4" height="44" rx="2" fill="#0F172A"/>
+  <rect x="31" y="10" width="2" height="44" fill="#94A3B8"/>
+
+  <!-- Handle knob -->
+  <circle cx="32" cy="32" r="6" fill="#CBD5E1"/>
+  <!-- Arrow left -->
+  <rect x="22" y="31" width="4" height="2" rx="1" fill="#94A3B8"/>
+  <rect x="22" y="29" width="2" height="2" rx="0.5" fill="#94A3B8"/>
+  <rect x="22" y="33" width="2" height="2" rx="0.5" fill="#94A3B8"/>
+  <!-- Arrow right -->
+  <rect x="38" y="31" width="4" height="2" rx="1" fill="#94A3B8"/>
+  <rect x="40" y="29" width="2" height="2" rx="0.5" fill="#94A3B8"/>
+  <rect x="40" y="33" width="2" height="2" rx="0.5" fill="#94A3B8"/>
+</svg>

@@ -1,0 +1,83 @@
+tt_content.aistea_lp_product_slider =< lib.contentElement
+tt_content.aistea_lp_product_slider {
+  templateName = ProductSlider
+  templateRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Templates/
+  partialRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Partials/
+  layoutRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Layouts/
+
+  dataProcessing {
+    10 = Aistea\LpBuilder\DataProcessing\ProductSliderDataProcessor
+  }
+}
+
+tt_content.aistea_lp_horizontal_slider =< lib.contentElement
+tt_content.aistea_lp_horizontal_slider {
+  templateName = HorizontalSlider
+  templateRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Templates/
+  partialRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Partials/
+  layoutRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Layouts/
+
+  dataProcessing {
+    10 = Aistea\LpBuilder\DataProcessing\HorizontalSliderDataProcessor
+  }
+}
+
+tt_content.aistea_lp_image_sequence =< lib.contentElement
+tt_content.aistea_lp_image_sequence {
+  templateName = ImageSequence
+  templateRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Templates/
+  partialRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Partials/
+  layoutRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Layouts/
+
+  dataProcessing {
+    10 = Aistea\LpBuilder\DataProcessing\ImageSequenceDataProcessor
+  }
+}
+
+tt_content.aistea_lp_fullscreen_video =< lib.contentElement
+tt_content.aistea_lp_fullscreen_video {
+  templateName = FullScreenVideo
+  templateRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Templates/
+  partialRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Partials/
+  layoutRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Layouts/
+
+  dataProcessing {
+    10 = Aistea\LpBuilder\DataProcessing\FullScreenVideoDataProcessor
+  }
+}
+
+tt_content.aistea_lp_before_after =< lib.contentElement
+tt_content.aistea_lp_before_after {
+  templateName = BeforeAfter
+  templateRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Templates/
+  partialRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Partials/
+  layoutRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Layouts/
+
+  dataProcessing {
+    10 = Aistea\LpBuilder\DataProcessing\BeforeAfterDataProcessor
+  }
+}
+
+tt_content.aistea_lp_hotspot_image =< lib.contentElement
+tt_content.aistea_lp_hotspot_image {
+  templateName = HotspotImage
+  templateRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Templates/
+  partialRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Partials/
+  layoutRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Layouts/
+
+  dataProcessing {
+    10 = Aistea\LpBuilder\DataProcessing\HotspotImageDataProcessor
+  }
+}
+
+tt_content.aistea_hero_sequenz =< lib.contentElement
+tt_content.aistea_hero_sequenz {
+  templateName = HeroSequenz
+  templateRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Templates/
+  partialRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Partials/
+  layoutRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Layouts/
+
+  dataProcessing {
+    10 = Aistea\LpBuilder\DataProcessing\HeroSequenzProcessor
+  }
+}

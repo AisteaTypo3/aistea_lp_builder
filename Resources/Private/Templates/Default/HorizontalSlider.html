@@ -1,0 +1,50 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:asset.css identifier="aistea-lp-horizontal-slider-css" href="EXT:aistea_lp_builder/Resources/Public/Css/lp-horizontal-slider.css" />
+<f:asset.script identifier="aistea-lp-horizontal-slider-js" src="EXT:aistea_lp_builder/Resources/Public/JavaScript/lp-horizontal-slider.js" defer="1" />
+
+<section class="aistea-hs" data-ce-uid="{data.uid}">
+  <f:if condition="{data.header}">
+    <header class="aistea-hs__header">
+      <h2 class="aistea-hs__title">{data.header}</h2>
+    </header>
+  </f:if>
+
+  <div class="aistea-hs__viewport">
+    <div class="aistea-hs__stage" role="region" aria-live="polite" aria-atomic="true">
+      <div class="aistea-hs__stageMedia">
+        <f:if condition="{slides.0.fallbackImage}">
+          <img
+            src="{slides.0.fallbackImage}"
+            alt="{slides.0.headline}"
+            class="aistea-hs__fallback"
+            loading="lazy"
+            decoding="async"
+          />
+        </f:if>
+      </div>
+
+      <p class="aistea-hs__headline">
+        <f:if condition="{slides.0.headline}">{slides.0.headline}</f:if>
+      </p>
+
+      <div class="aistea-hs__controls">
+        <div class="aistea-hs__dots" role="tablist" aria-label="Slide navigation">
+          <f:for each="{slides}" as="slide" iteration="it">
+            <button
+              type="button"
+              class="aistea-hs__dot{f:if(condition: it.isFirst, then: ' is-active', else: '')}"
+              data-slide-index="{it.index}"
+              role="tab"
+              aria-selected="{f:if(condition: it.isFirst, then: 'true', else: 'false')}"
+              aria-label="Slide {it.cycle}"
+            ></button>
+          </f:for>
+        </div>
+        <button type="button" class="aistea-hs__play" aria-label="Pause autoplay">❚❚</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="application/json" class="aistea-hs__payload"><f:format.raw>{slidesJson}</f:format.raw></script>
+</section>
+</html>

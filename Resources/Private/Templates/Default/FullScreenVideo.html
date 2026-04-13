@@ -1,0 +1,43 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:asset.css identifier="aistea-lp-fullscreen-video-css" href="EXT:aistea_lp_builder/Resources/Public/Css/lp-fullscreen-video.css" />
+<f:asset.script identifier="aistea-lp-fullscreen-video-js" src="EXT:aistea_lp_builder/Resources/Public/JavaScript/lp-fullscreen-video.js" defer="1" />
+
+<section class="aistea-fsv" data-vimeo-embed-url="{fsv.vimeoEmbedUrl}">
+  <div class="aistea-fsv__media">
+    <video class="aistea-fsv__shortVideo" autoplay muted loop playsinline preload="metadata">
+      <f:if condition="{fsv.shortVideoUrl}">
+        <source src="{fsv.shortVideoUrl}" type="video/mp4" />
+      </f:if>
+    </video>
+  </div>
+
+  <div class="aistea-fsv__overlay">
+    <f:if condition="{fsv.kicker}">
+      <p class="aistea-fsv__kicker">{fsv.kicker}</p>
+    </f:if>
+    <f:if condition="{fsv.headline}">
+      <h2 class="aistea-fsv__headline">{fsv.headline}</h2>
+    </f:if>
+    <f:if condition="{fsv.vimeoEmbedUrl}">
+      <button type="button" class="aistea-fsv__cta">{fsv.buttonLabel}</button>
+    </f:if>
+  </div>
+
+  <div class="aistea-fsv__modal" hidden aria-hidden="true">
+    <button type="button" class="aistea-fsv__close" aria-label="Close video">
+      <svg class="aistea-fsv__closeIcon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M6 6L18 18M18 6L6 18"></path>
+      </svg>
+    </button>
+    <div class="aistea-fsv__dialog" role="dialog" aria-modal="true">
+      <iframe
+        class="aistea-fsv__iframe"
+        src=""
+        title="Vimeo video"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+</section>
+</html>

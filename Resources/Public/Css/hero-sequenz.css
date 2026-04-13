@@ -1,0 +1,18 @@
+.aistea-hero-sequenz-wrapper {
+  --aistea-hero-bg: transparent;
+  --aistea-hero-aspect-ratio: auto;
+}
+
+.aistea-hero-sequenz {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--aistea-hero-bg, transparent);
+  aspect-ratio: var(--aistea-hero-aspect-ratio, auto);
+}
+
+.aistea-hero-sequenz__image {
+  display: block;
+  width: 100%;
+  height: auto;
+}

@@ -1,0 +1,54 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:asset.css identifier="aistea-lp-before-after-css" href="EXT:aistea_lp_builder/Resources/Public/Css/lp-before-after.css" />
+<f:asset.script identifier="aistea-lp-before-after-js" src="EXT:aistea_lp_builder/Resources/Public/JavaScript/lp-before-after.js" defer="1" />
+
+<section class="aistea-ba" data-initial-position="{ba.initialPosition}">
+  <div class="aistea-ba__stage">
+
+    <f:if condition="{ba.beforeImage.url}">
+      <div class="aistea-ba__pane aistea-ba__pane--before">
+        <img class="aistea-ba__img aistea-ba__img--before"
+             src="{ba.beforeImage.url}"
+             alt="{ba.beforeImage.alt}"
+             draggable="false"
+        />
+      </div>
+    </f:if>
+
+    <f:if condition="{ba.afterImage.url}">
+      <div class="aistea-ba__pane aistea-ba__pane--after">
+        <img class="aistea-ba__img aistea-ba__img--after"
+             src="{ba.afterImage.url}"
+             alt="{ba.afterImage.alt}"
+             draggable="false"
+        />
+      </div>
+    </f:if>
+
+    <div class="aistea-ba__handle"
+         role="slider"
+         tabindex="0"
+         aria-valuemin="0"
+         aria-valuemax="100"
+         aria-valuenow="{ba.initialPosition}"
+         aria-label="Before and after comparison"
+    >
+      <div class="aistea-ba__handle-line" aria-hidden="true"></div>
+      <div class="aistea-ba__handle-knob" aria-hidden="true">
+        <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+          <path d="M8 5L3 12L8 19M16 5L21 12L16 19"/>
+        </svg>
+      </div>
+      <div class="aistea-ba__handle-line" aria-hidden="true"></div>
+    </div>
+
+    <f:if condition="{ba.labelBefore}">
+      <span class="aistea-ba__label aistea-ba__label--before" aria-hidden="true">{ba.labelBefore}</span>
+    </f:if>
+    <f:if condition="{ba.labelAfter}">
+      <span class="aistea-ba__label aistea-ba__label--after" aria-hidden="true">{ba.labelAfter}</span>
+    </f:if>
+
+  </div>
+</section>
+</html>
