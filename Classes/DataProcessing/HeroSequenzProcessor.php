@@ -46,6 +46,7 @@ final class HeroSequenzProcessor implements DataProcessorInterface
             $endpointUrl .= '&L=' . $languageId;
         }
 
+        $scrollDriven = (bool)($record['scroll_driven'] ?? false);
         $fps = max(1, (int)($record['desktop_fps'] ?? 24));
         $breakpoint = max(0, (int)($record['mobile_breakpoint'] ?? 768));
         $loop = (bool)($record['desktop_loop'] ?? false);
@@ -75,6 +76,7 @@ final class HeroSequenzProcessor implements DataProcessorInterface
             'backgroundColor' => $backgroundColor,
             'altText' => $altText,
             'breakpoint' => $breakpoint,
+            'scrollDriven' => $scrollDriven,
             'fps' => $fps,
             'loop' => $loop,
             'preloadStrategy' => $preloadStrategy,

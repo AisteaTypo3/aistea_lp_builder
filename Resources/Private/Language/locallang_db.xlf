@@ -83,6 +83,7 @@
       <trans-unit id="tt_content.preload_strategy"><source>Preload strategy</source></trans-unit>
       <trans-unit id="tt_content.preload_strategy.smart"><source>Smart</source></trans-unit>
       <trans-unit id="tt_content.preload_strategy.all"><source>All</source></trans-unit>
+      <trans-unit id="tt_content.scroll_driven"><source>Scroll-driven animation</source></trans-unit>
       <trans-unit id="tt_content.alt_text"><source>Alt text</source></trans-unit>
       <trans-unit id="tt_content.background_color"><source>Background color</source></trans-unit>
       <trans-unit id="tt_content.render_full_list_on_mobile"><source>Render full list on mobile (legacy)</source></trans-unit>

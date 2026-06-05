@@ -35,6 +35,7 @@ CREATE TABLE tt_content (
   mobile_mode varchar(20) DEFAULT 'lastFrame' NOT NULL,
   mobile_static_image int(11) unsigned DEFAULT '0' NOT NULL,
   preload_strategy varchar(20) DEFAULT 'smart' NOT NULL,
+  scroll_driven tinyint(1) unsigned DEFAULT '0' NOT NULL,
   alt_text varchar(255) DEFAULT '' NOT NULL,
   background_color varchar(32) DEFAULT '' NOT NULL,
   render_full_list_on_mobile tinyint(1) unsigned DEFAULT '0' NOT NULL

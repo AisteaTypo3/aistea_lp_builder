@@ -540,6 +540,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
         ],
         'desktop_fps' => [
             'exclude' => true,
+            'displayCond' => 'FIELD:scroll_driven:=:0',
             'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.desktop_fps',
             'config' => [
                 'type' => 'number',
@@ -552,6 +553,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
         ],
         'desktop_loop' => [
             'exclude' => true,
+            'displayCond' => 'FIELD:scroll_driven:=:0',
             'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.desktop_loop',
             'config' => [
                 'type' => 'check',
@@ -607,6 +609,14 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
                     ['LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.preload_strategy.all', 'all'],
                 ],
                 'default' => 'smart',
+            ],
+        ],
+        'scroll_driven' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.scroll_driven',
+            'config' => [
+                'type' => 'check',
+                'default' => 0,
             ],
         ],
         'alt_text' => [
@@ -881,6 +891,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
             --palette--;;general,
             --palette--;;headers,
             file_collection,
+            scroll_driven,
             desktop_fps,
             desktop_loop,
             mobile_breakpoint,

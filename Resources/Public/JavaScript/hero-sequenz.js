@@ -144,6 +144,60 @@
     });
   }
 
+  function drawCover(ctx, img, canvasW, canvasH) {
+    var iw = img.naturalWidth || img.width;
+    var ih = img.naturalHeight || img.height;
+    var imgAspect = iw / ih;
+    var canvasAspect = canvasW / canvasH;
+    var sx, sy, sw, sh;
+    if (imgAspect > canvasAspect) {
+      sh = ih;
+      sw = sh * canvasAspect;
+      sx = (iw - sw) / 2;
+      sy = 0;
+    } else {
+      sw = iw;
+      sh = sw / canvasAspect;
+      sx = 0;
+      sy = (ih - sh) / 2;
+    }
+    ctx.drawImage(img, sx, sy, sw, sh, 0, 0, canvasW, canvasH);
+  }
+
+  function attachScrollDriven(element, canvas, ctx, frames, frameCache) {
+    var wrapper = element.parentElement;
+    var scrollRange = window.innerHeight;
+
+    // Pin the element and add extra wrapper height so the user "stays" in
+    // the hero while scrolling through all frames.
+    element.classList.add('aistea-hero-sequenz--scroll-driven');
+    wrapper.style.height = (window.innerHeight + scrollRange) + 'px';
+
+    var lastDrawnIndex = -1;
+
+    function drawFrame(frameIndex) {
+      var cachedFrame = frameCache.get(frames[frameIndex]);
+      if (cachedFrame) {
+        drawCover(ctx, cachedFrame, canvas.width, canvas.height);
+      }
+    }
+
+    function onScroll() {
+      // progress 0→1 as the wrapper scrolls past the viewport top
+      var scrolled = Math.max(0, -wrapper.getBoundingClientRect().top);
+      var progress = Math.min(1, scrolled / scrollRange);
+      var frameIndex = Math.min(frames.length - 1, Math.floor(progress * frames.length));
+      if (frameIndex === lastDrawnIndex) {
+        return;
+      }
+      lastDrawnIndex = frameIndex;
+      drawFrame(frameIndex);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    drawFrame(0);
+  }
+
   async function runSequence(element) {
     var ceUid = String(element.dataset.ceUid || '');
     if (!ceUid || element.dataset.played === '1' || playedCtes.has(ceUid)) {
@@ -154,6 +208,7 @@
     var preloadMode = element.dataset.preload || 'smart';
     var fps = Number(element.dataset.fps || 24);
     var loop = String(element.dataset.loop || '') === '1' || String(element.dataset.loop || '').toLowerCase() === 'true';
+    var scrollDriven = element.dataset.scrollDriven === '1' || element.dataset.scrollDriven === 'true';
     var img = element.querySelector('.aistea-hero-sequenz__image');
     var frameCache = new Map();
     var framePromises = new Map();
@@ -183,8 +238,14 @@
       // img.src swapping would re-validate every frame against the server (no-cache headers).
       var canvas = document.createElement('canvas');
       var firstFrame = frameCache.get(frames[0]);
-      canvas.width = firstFrame ? firstFrame.naturalWidth : (img.naturalWidth || 1920);
-      canvas.height = firstFrame ? firstFrame.naturalHeight : (img.naturalHeight || 1080);
+      if (scrollDriven) {
+        // Buffer matches the viewport so the cover-crop calculation is pixel-exact.
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      } else {
+        canvas.width = firstFrame ? firstFrame.naturalWidth : (img.naturalWidth || 1920);
+        canvas.height = firstFrame ? firstFrame.naturalHeight : (img.naturalHeight || 1080);
+      }
       canvas.className = img.className;
       canvas.setAttribute('aria-hidden', 'true');
       img.parentNode.insertBefore(canvas, img);
@@ -194,7 +255,12 @@
 
       element.dataset.played = '1';
       playedCtes.add(ceUid);
-      await playFrames(canvas, ctx, frames, fps, loop, frameCache);
+
+      if (scrollDriven) {
+        attachScrollDriven(element, canvas, ctx, frames, frameCache);
+      } else {
+        await playFrames(canvas, ctx, frames, fps, loop, frameCache);
+      }
     } catch (error) {
       window.console.warn('Hero sequence failed', error);
       img.style.display = '';

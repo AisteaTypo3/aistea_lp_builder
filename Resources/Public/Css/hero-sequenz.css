@@ -25,6 +25,19 @@ canvas.aistea-hero-sequenz__image {
   height: 100%;
 }
 
+/* Scroll-driven mode: pin the element so the user stays inside until 100% is reached */
+.aistea-hero-sequenz--scroll-driven {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  aspect-ratio: auto;
+}
+
+.aistea-hero-sequenz--scroll-driven canvas.aistea-hero-sequenz__image {
+  width: 100%;
+  height: 100%;
+}
+
 .aistea-hero-sequenz__caption {
   position: absolute;
   inset: 0;

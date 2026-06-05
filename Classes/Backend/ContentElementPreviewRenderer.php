@@ -178,15 +178,21 @@ final class ContentElementPreviewRenderer extends StandardContentPreviewRenderer
      */
     private function renderHeroSequencePreview(array $record): string
     {
+        $scrollDriven = (bool)($record['scroll_driven'] ?? false);
+        $parts = [
+            $this->badge('Collection', (int)($record['file_collection'] ?? 0)),
+            $this->badge('Scroll', $this->boolLabel($scrollDriven)),
+        ];
+        if (!$scrollDriven) {
+            $parts[] = $this->badge('FPS', max(1, (int)($record['desktop_fps'] ?? 24)));
+            $parts[] = $this->badge('Loop', $this->boolLabel((bool)($record['desktop_loop'] ?? false)));
+        }
+        $parts[] = $this->metaBadge('Mobile', (string)($record['mobile_mode'] ?? 'lastFrame'));
+        $parts[] = $this->metaBadge('Preload', (string)($record['preload_strategy'] ?? 'smart'));
+
         return $this->wrapPreview(
             'Desktop-only hero image sequence sourced from a TYPO3 folder collection.',
-            [
-                $this->badge('Collection', (int)($record['file_collection'] ?? 0)),
-                $this->badge('FPS', max(1, (int)($record['desktop_fps'] ?? 24))),
-                $this->badge('Loop', $this->boolLabel((bool)($record['desktop_loop'] ?? false))),
-                $this->metaBadge('Mobile', (string)($record['mobile_mode'] ?? 'lastFrame')),
-                $this->metaBadge('Preload', (string)($record['preload_strategy'] ?? 'smart')),
-            ]
+            $parts
         );
     }
 
