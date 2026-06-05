@@ -12,6 +12,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
     $beforeAfterContentType = 'aistea_lp_before_after';
     $hotspotImageContentType = 'aistea_lp_hotspot_image';
     $interviewBoxesContentType = 'aistea_lp_interview_boxes';
+    $highlightBoxesContentType = 'aistea_lp_highlight_boxes';
     $heroSequenzContentType = 'aistea_hero_sequenz';
     $builderGroup = 'aistea';
 
@@ -90,6 +91,16 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
             'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.CType.aistea_lp_interview_boxes',
             'value' => $interviewBoxesContentType,
             'icon' => 'aistea-lp-interview-boxes-ce',
+            'group' => $builderGroup,
+        ]
+    );
+    ExtensionManagementUtility::addTcaSelectItem(
+        'tt_content',
+        'CType',
+        [
+            'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.CType.aistea_lp_highlight_boxes',
+            'value' => $highlightBoxesContentType,
+            'icon' => 'aistea-lp-highlight-boxes-ce',
             'group' => $builderGroup,
         ]
     );
@@ -485,6 +496,35 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
                 'maxitems' => 4,
             ],
         ],
+        'tx_aistealpproductslider_highlights' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.tx_aistealpproductslider_highlights',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_aistealpproductslider_highlight',
+                'foreign_field' => 'parentid',
+                'foreign_table_field' => 'parenttable',
+                'foreign_sortby' => 'sorting',
+                'appearance' => [
+                    'expandSingle' => true,
+                    'useSortable' => true,
+                    'enabledControls' => [
+                        'info' => true,
+                        'new' => true,
+                        'dragdrop' => true,
+                        'sort' => true,
+                        'hide' => true,
+                        'delete' => true,
+                        'localize' => true,
+                    ],
+                ],
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
+                'minitems' => 1,
+                'maxitems' => 4,
+            ],
+        ],
         'file_collection' => [
             'exclude' => true,
             'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.file_collection',
@@ -800,6 +840,37 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
             'header' => [
                 'config' => [
                     'placeholder' => 'Surgical Interviews',
+                ],
+            ],
+        ],
+    ];
+
+    $highlightBoxesShowItem = '
+        --palette--;;general,
+        --palette--;;headers,
+        --div--;LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tabs.highlights,
+        tx_aistealpproductslider_highlights,
+        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
+        --palette--;;hidden,
+        --palette--;;access,
+        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:categories,
+        categories,
+        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:notes,
+        rowDescription
+    ';
+
+    $GLOBALS['TCA']['tt_content']['types'][$highlightBoxesContentType] = [
+        'showitem' => $highlightBoxesShowItem,
+        'previewRenderer' => \Aistea\LpBuilder\Backend\ContentElementPreviewRenderer::class,
+        'columnsOverrides' => [
+            'header' => [
+                'config' => [
+                    'placeholder' => 'Highlights',
+                ],
+            ],
+            'subheader' => [
+                'config' => [
+                    'placeholder' => 'Claim',
                 ],
             ],
         ],

@@ -86,45 +86,61 @@
     return '/' + String(url).replace(/^\.?\//, '');
   }
 
-  function playFrames(img, frames, fps, loop, frameCache, framePromises) {
+  function playFrames(canvas, ctx, frames, fps, loop, frameCache) {
     return new Promise(function (resolve) {
-      if (!img || !Array.isArray(frames) || frames.length === 0) {
+      if (!canvas || !ctx || !Array.isArray(frames) || frames.length === 0) {
         resolve();
         return;
       }
 
       var frameDuration = 1000 / Math.max(1, Number(fps || 24));
       var frameIndex = 0;
-      var nextFrameAt = performance.now();
+      var previousTimestamp = 0;
+      var rafId = 0;
 
-      img.style.willChange = 'contents';
-
-      async function tick() {
-        var currentUrl = frames[frameIndex];
-        if (!frameCache.has(currentUrl)) {
-          await ensureFrameLoaded(currentUrl, frameCache, framePromises);
+      function finish() {
+        canvas.style.willChange = 'auto';
+        if (rafId) {
+          window.cancelAnimationFrame(rafId);
         }
-        if (frameCache.has(currentUrl) && img.src !== currentUrl) {
-          img.src = currentUrl;
-        }
-        frameIndex += 1;
+        resolve();
+      }
 
-        if (frameIndex >= frames.length) {
-          if (loop) {
-            frameIndex = 0;
-          } else {
-            img.style.willChange = 'auto';
-            resolve();
-            return;
+      function tick(timestamp) {
+        if (previousTimestamp === 0) {
+          previousTimestamp = timestamp;
+        }
+
+        var elapsed = timestamp - previousTimestamp;
+        if (elapsed >= frameDuration) {
+          var steps = Math.max(1, Math.floor(elapsed / frameDuration));
+          previousTimestamp += steps * frameDuration;
+          frameIndex += steps;
+
+          if (frameIndex >= frames.length) {
+            if (loop) {
+              frameIndex = frameIndex % frames.length;
+            } else {
+              finish();
+              return;
+            }
+          }
+
+          var cachedFrame = frameCache.get(frames[frameIndex]);
+          if (cachedFrame) {
+            ctx.drawImage(cachedFrame, 0, 0, canvas.width, canvas.height);
           }
         }
 
-        nextFrameAt += frameDuration;
-        var delay = Math.max(0, nextFrameAt - performance.now());
-        window.setTimeout(tick, delay);
+        rafId = window.requestAnimationFrame(tick);
       }
 
-      window.setTimeout(tick, 0);
+      canvas.style.willChange = 'transform';
+      var firstCached = frameCache.get(frames[0]);
+      if (firstCached) {
+        ctx.drawImage(firstCached, 0, 0, canvas.width, canvas.height);
+      }
+      rafId = window.requestAnimationFrame(tick);
     });
   }
 
@@ -160,24 +176,28 @@
         return;
       }
 
-      if (preloadMode === 'all') {
-        await preloadFrames(frames, 6, frameCache, framePromises);
-      } else {
-        var eager = uniqueUrls([frames[0], normalizeFrameUrl(data.last)].concat(frames.slice(1, 4)));
-        await preloadFrames(eager, 4, frameCache, framePromises);
+      await preloadFrames(frames, preloadMode === 'all' ? 8 : 4, frameCache, framePromises);
 
-        var eagerSet = new Set(eager);
-        var background = frames.filter(function (url) {
-          return !eagerSet.has(url);
-        });
-        void preloadFrames(background, 3, frameCache, framePromises);
-      }
+      // Create canvas for jank-free playback — ctx.drawImage() reads directly from
+      // in-memory ImageElements in frameCache, bypassing the HTTP cache entirely.
+      // img.src swapping would re-validate every frame against the server (no-cache headers).
+      var canvas = document.createElement('canvas');
+      var firstFrame = frameCache.get(frames[0]);
+      canvas.width = firstFrame ? firstFrame.naturalWidth : (img.naturalWidth || 1920);
+      canvas.height = firstFrame ? firstFrame.naturalHeight : (img.naturalHeight || 1080);
+      canvas.className = img.className;
+      canvas.setAttribute('aria-hidden', 'true');
+      img.parentNode.insertBefore(canvas, img);
+      img.style.display = 'none';
+
+      var ctx = canvas.getContext('2d');
 
       element.dataset.played = '1';
       playedCtes.add(ceUid);
-      await playFrames(img, frames, fps, loop, frameCache, framePromises);
+      await playFrames(canvas, ctx, frames, fps, loop, frameCache);
     } catch (error) {
       window.console.warn('Hero sequence failed', error);
+      img.style.display = '';
     }
   }
 
@@ -193,6 +213,13 @@
 
     if (fallback) {
       img.src = fallback;
+    }
+    try {
+      img.decoding = 'async';
+      img.loading = 'eager';
+      img.fetchPriority = 'high';
+    } catch (error) {
+      // Not supported in every browser.
     }
 
     var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

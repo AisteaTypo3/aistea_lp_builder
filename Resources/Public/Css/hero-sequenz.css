@@ -15,6 +15,14 @@
   display: block;
   width: 100%;
   height: auto;
+  /* canvas shares this class; image-rendering improves quality when scaled down */
+  image-rendering: auto;
+}
+
+canvas.aistea-hero-sequenz__image {
+  /* The parent has a matching aspect-ratio; fill it fully. Canvas ignores height:auto
+     from the intrinsic-size calculation that works for <img>. */
+  height: 100%;
 }
 
 .aistea-hero-sequenz__caption {
@@ -56,6 +64,7 @@
   font-size: 5rem;
   font-weight: 700;
   line-height: 1;
+  text-shadow: 0 1px 6px black;
 }
 
 .aistea-hero-sequenz__subheadline {

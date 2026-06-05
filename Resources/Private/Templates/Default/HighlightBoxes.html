@@ -1,0 +1,39 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:asset.css identifier="aistea-lp-highlight-boxes-css" href="EXT:aistea_lp_builder/Resources/Public/Css/lp-highlight-boxes.css" />
+<f:asset.script identifier="aistea-lp-highlight-boxes-js" src="EXT:aistea_lp_builder/Resources/Public/JavaScript/lp-highlight-boxes.js" defer="1" />
+
+<section class="aistea-hb">
+  <div class="aistea-hb__inner">
+    <f:if condition="{data.header}">
+      <header class="aistea-hb__header">
+        <h2 class="aistea-hb__title"><f:format.raw>{data.header}</f:format.raw></h2>
+        <f:if condition="{data.subheader}">
+          <div class="aistea-hb__claim"><f:format.raw>{data.subheader}</f:format.raw></div>
+        </f:if>
+      </header>
+    </f:if>
+
+    <div class="aistea-hb__grid aistea-hb__grid--count-{highlights -> f:count()}">
+      <f:for each="{highlights}" as="highlight">
+        <article class="aistea-hb__card">
+          <f:if condition="{highlight.title}">
+            <h3 class="aistea-hb__name">{highlight.title}</h3>
+          </f:if>
+
+          <f:if condition="{highlight.hasImage}">
+            <div class="aistea-hb__media">
+              <img class="aistea-hb__image" src="{highlight.imageUrl}" alt="{highlight.title}" loading="lazy" decoding="async" />
+            </div>
+          </f:if>
+
+          <f:if condition="{highlight.bodytext}">
+            <div class="aistea-hb__text">
+              <f:format.html>{highlight.bodytext}</f:format.html>
+            </div>
+          </f:if>
+        </article>
+      </f:for>
+    </div>
+  </div>
+</section>
+</html>

@@ -82,6 +82,18 @@ tt_content.aistea_lp_interview_boxes {
   }
 }
 
+tt_content.aistea_lp_highlight_boxes =< lib.contentElement
+tt_content.aistea_lp_highlight_boxes {
+  templateName = HighlightBoxes
+  templateRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Templates/
+  partialRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Partials/
+  layoutRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Layouts/
+
+  dataProcessing {
+    10 = Aistea\LpBuilder\DataProcessing\HighlightBoxesDataProcessor
+  }
+}
+
 tt_content.aistea_hero_sequenz =< lib.contentElement
 tt_content.aistea_hero_sequenz {
   templateName = HeroSequenz

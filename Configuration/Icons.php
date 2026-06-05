@@ -31,6 +31,10 @@ return [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => 'EXT:aistea_lp_builder/Resources/Public/Icons/ContentProductSlider.svg',
     ],
+    'aistea-lp-highlight-boxes-ce' => [
+        'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        'source' => 'EXT:aistea_lp_builder/Resources/Public/Icons/ContentHotspotImage.svg',
+    ],
     'content-aistea-hero-sequenz' => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => 'EXT:aistea_lp_builder/Resources/Public/Icons/content-hero-sequenz.svg',
