@@ -28,6 +28,19 @@
                 <f:if condition="{heroSequenz.width}">width="{heroSequenz.width}"</f:if>
                 <f:if condition="{heroSequenz.height}">height="{heroSequenz.height}"</f:if> />
         </noscript>
+
+        <figcaption class="aistea-hero-sequenz__caption">
+            <f:if condition="{data.header}">
+                <div class="aistea-hero-sequenz__headline">
+                    <f:format.raw>{data.header}</f:format.raw>
+                </div>
+            </f:if>
+            <f:if condition="{data.subheader}">
+                <div class="aistea-hero-sequenz__subheadline">
+                    <f:format.raw>{data.subheader}</f:format.raw>
+                </div>
+            </f:if>
+        </figcaption>
     </figure>
 </div>
 </html>

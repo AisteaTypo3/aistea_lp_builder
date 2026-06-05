@@ -11,7 +11,17 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
     $fullScreenVideoContentType = 'aistea_lp_fullscreen_video';
     $beforeAfterContentType = 'aistea_lp_before_after';
     $hotspotImageContentType = 'aistea_lp_hotspot_image';
+    $interviewBoxesContentType = 'aistea_lp_interview_boxes';
     $heroSequenzContentType = 'aistea_hero_sequenz';
+    $builderGroup = 'aistea';
+
+    ExtensionManagementUtility::addTcaSelectItemGroup(
+        'tt_content',
+        'CType',
+        $builderGroup,
+        'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:group.aistea',
+        'after:special'
+    );
 
     ExtensionManagementUtility::addTcaSelectItem(
         'tt_content',
@@ -20,7 +30,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
             'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.CType.aistea_lp_product_slider',
             'value' => $contentType,
             'icon' => 'aistea-lp-builder-ce',
-            'group' => 'common',
+            'group' => $builderGroup,
         ]
     );
     ExtensionManagementUtility::addTcaSelectItem(
@@ -30,7 +40,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
             'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.CType.aistea_lp_fullscreen_video',
             'value' => $fullScreenVideoContentType,
             'icon' => 'aistea-lp-fullscreen-video-ce',
-            'group' => 'common',
+            'group' => $builderGroup,
         ]
     );
     ExtensionManagementUtility::addTcaSelectItem(
@@ -40,7 +50,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
             'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.CType.aistea_lp_horizontal_slider',
             'value' => $horizontalContentType,
             'icon' => 'aistea-lp-horizontal-slider-ce',
-            'group' => 'common',
+            'group' => $builderGroup,
         ]
     );
     ExtensionManagementUtility::addTcaSelectItem(
@@ -50,7 +60,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
             'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.CType.aistea_lp_image_sequence',
             'value' => $imageSequenceContentType,
             'icon' => 'aistea-lp-image-sequence-ce',
-            'group' => 'common',
+            'group' => $builderGroup,
         ]
     );
     ExtensionManagementUtility::addTcaSelectItem(
@@ -60,7 +70,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
             'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.CType.aistea_lp_before_after',
             'value' => $beforeAfterContentType,
             'icon' => 'aistea-lp-before-after-ce',
-            'group' => 'common',
+            'group' => $builderGroup,
         ]
     );
     ExtensionManagementUtility::addTcaSelectItem(
@@ -70,7 +80,17 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
             'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.CType.aistea_lp_hotspot_image',
             'value' => $hotspotImageContentType,
             'icon' => 'aistea-lp-hotspot-image-ce',
-            'group' => 'common',
+            'group' => $builderGroup,
+        ]
+    );
+    ExtensionManagementUtility::addTcaSelectItem(
+        'tt_content',
+        'CType',
+        [
+            'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.CType.aistea_lp_interview_boxes',
+            'value' => $interviewBoxesContentType,
+            'icon' => 'aistea-lp-interview-boxes-ce',
+            'group' => $builderGroup,
         ]
     );
     ExtensionManagementUtility::addTcaSelectItem(
@@ -80,7 +100,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
             'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.CType.aistea_hero_sequenz',
             'value' => $heroSequenzContentType,
             'icon' => 'content-aistea-hero-sequenz',
-            'group' => 'common',
+            'group' => $builderGroup,
         ]
     );
 
@@ -436,6 +456,35 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
                 'minitems' => 0,
             ],
         ],
+        'tx_aistealpproductslider_interviews' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.tx_aistealpproductslider_interviews',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_aistealpproductslider_interview',
+                'foreign_field' => 'parentid',
+                'foreign_table_field' => 'parenttable',
+                'foreign_sortby' => 'sorting',
+                'appearance' => [
+                    'expandSingle' => true,
+                    'useSortable' => true,
+                    'enabledControls' => [
+                        'info' => true,
+                        'new' => true,
+                        'dragdrop' => true,
+                        'sort' => true,
+                        'hide' => true,
+                        'delete' => true,
+                        'localize' => true,
+                    ],
+                ],
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
+                'minitems' => 1,
+                'maxitems' => 4,
+            ],
+        ],
         'file_collection' => [
             'exclude' => true,
             'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.file_collection',
@@ -725,6 +774,32 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
             'header' => [
                 'config' => [
                     'placeholder' => 'Hotspot Image',
+                ],
+            ],
+        ],
+    ];
+
+    $interviewBoxesShowItem = '
+        --palette--;;general,
+        --palette--;;headers,
+        --div--;LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tabs.interviews,
+        tx_aistealpproductslider_interviews,
+        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
+        --palette--;;hidden,
+        --palette--;;access,
+        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:categories,
+        categories,
+        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:notes,
+        rowDescription
+    ';
+
+    $GLOBALS['TCA']['tt_content']['types'][$interviewBoxesContentType] = [
+        'showitem' => $interviewBoxesShowItem,
+        'previewRenderer' => \Aistea\LpBuilder\Backend\ContentElementPreviewRenderer::class,
+        'columnsOverrides' => [
+            'header' => [
+                'config' => [
+                    'placeholder' => 'Surgical Interviews',
                 ],
             ],
         ],

@@ -6,3 +6,8 @@ services:
 
   Aistea\LpBuilder\:
     resource: '../Classes/*'
+
+  Aistea\LpBuilder\EventListener\InterviewInlineDuplicateControl:
+    tags:
+      - name: event.listener
+        event: TYPO3\CMS\Backend\Form\Event\ModifyInlineElementControlsEvent

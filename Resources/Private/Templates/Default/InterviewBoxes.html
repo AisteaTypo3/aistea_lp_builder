@@ -1,0 +1,56 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:asset.css identifier="aistea-lp-interview-boxes-css" href="EXT:aistea_lp_builder/Resources/Public/Css/lp-interview-boxes.css" />
+<f:asset.script identifier="aistea-lp-interview-boxes-js" src="EXT:aistea_lp_builder/Resources/Public/JavaScript/lp-interview-boxes.js" defer="1" />
+
+<section class="aistea-ib">
+  <div class="aistea-ib__inner">
+    <f:if condition="{data.header}">
+      <header class="aistea-ib__header">
+        <h2 class="aistea-ib__title">{data.header}</h2>
+      </header>
+    </f:if>
+
+    <div class="aistea-ib__grid aistea-ib__grid--count-{interviews -> f:count()}">
+      <f:for each="{interviews}" as="interview">
+        <article class="aistea-ib__card">
+          <div class="aistea-ib__media">
+            <f:if condition="{interview.isVimeo}">
+              <f:then>
+                <iframe
+                  class="aistea-ib__iframe"
+                  src="{interview.vimeoEmbedUrl}"
+                  title="{interview.name}"
+                  loading="lazy"
+                  allow="fullscreen; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+              </f:then>
+              <f:else>
+                <f:if condition="{interview.videoUrl}">
+                  <video class="aistea-ib__video" controls playsinline preload="metadata">
+                    <source src="{interview.videoUrl}" />
+                  </video>
+                </f:if>
+              </f:else>
+            </f:if>
+          </div>
+
+          <div class="aistea-ib__person">
+            <f:if condition="{interview.name}">
+              <h3 class="aistea-ib__name">{interview.name}</h3>
+            </f:if>
+            <f:if condition="{interview.subline}">
+              <p class="aistea-ib__subline">{interview.subline}</p>
+            </f:if>
+          </div>
+          <f:if condition="{interview.statement}">
+            <div class="aistea-ib__statement">
+              <f:format.html>{interview.statement}</f:format.html>
+            </div>
+          </f:if>
+        </article>
+      </f:for>
+    </div>
+  </div>
+</section>
+</html>

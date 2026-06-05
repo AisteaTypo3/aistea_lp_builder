@@ -8,6 +8,7 @@ TYPO3 v13 LTS extension providing content elements:
 - `aistea_lp_fullscreen_video` (fullscreen autoplay MP4 teaser with CTA popup for long Vimeo video)
 - `aistea_lp_before_after` (before/after comparison slider)
 - `aistea_lp_hotspot_image` (image with interactive hotspots)
+- `aistea_lp_interview_boxes` (3-4 interview cards with Vimeo or local video, name and statement)
 - `aistea_hero_sequenz` (desktop hero image sequence based on TYPO3 folder collections)
 
 ## Migration
@@ -19,7 +20,7 @@ TYPO3 v13 LTS extension providing content elements:
 
 Migration behavior:
 
-- Existing `CType` values stay compatible: `aistea_lp_product_slider`, `aistea_lp_horizontal_slider`, `aistea_lp_image_sequence`, `aistea_lp_fullscreen_video`, `aistea_lp_before_after`, `aistea_lp_hotspot_image`, `aistea_hero_sequenz`
+- Existing `CType` values stay compatible: `aistea_lp_product_slider`, `aistea_lp_horizontal_slider`, `aistea_lp_image_sequence`, `aistea_lp_fullscreen_video`, `aistea_lp_before_after`, `aistea_lp_hotspot_image`, `aistea_lp_interview_boxes`, `aistea_hero_sequenz`
 - Existing slider DB fields stay compatible via the original `tx_aistealpproductslider_*` field names
 - The hero sequence keeps the existing `aistea_hero_sequenz` `CType`, so no content-record migration is required
 

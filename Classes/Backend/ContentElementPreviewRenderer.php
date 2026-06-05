@@ -21,6 +21,7 @@ final class ContentElementPreviewRenderer extends StandardContentPreviewRenderer
             'aistea_lp_fullscreen_video' => $this->renderFullScreenVideoPreview($record),
             'aistea_lp_before_after' => $this->renderBeforeAfterPreview($record),
             'aistea_lp_hotspot_image' => $this->renderHotspotImagePreview($record),
+            'aistea_lp_interview_boxes' => $this->renderInterviewBoxesPreview($record),
             'aistea_hero_sequenz' => $this->renderHeroSequencePreview($record),
             default => parent::renderPageModulePreviewContent($item),
         };
@@ -141,6 +142,19 @@ final class ContentElementPreviewRenderer extends StandardContentPreviewRenderer
             [
                 $this->badge('Image', $this->boolLabel((int)($record['tx_aistealpproductslider_hi_image'] ?? 0) > 0)),
                 $this->badge('Hotspots', (int)($record['tx_aistealpproductslider_hi_hotspots'] ?? 0)),
+            ]
+        );
+    }
+
+    /**
+     * @param array<string, mixed> $record
+     */
+    private function renderInterviewBoxesPreview(array $record): string
+    {
+        return $this->wrapPreview(
+            'Interview card grid with Vimeo or local video, name and statement.',
+            [
+                $this->badge('Interviews', (int)($record['tx_aistealpproductslider_interviews'] ?? 0)),
             ]
         );
     }

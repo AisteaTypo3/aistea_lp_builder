@@ -15,11 +15,15 @@
       <trans-unit id="tt_content.CType.aistea_lp_before_after.description"><source>Drag-handle image comparison with before and after states.</source></trans-unit>
       <trans-unit id="tt_content.CType.aistea_lp_hotspot_image"><source>LP Hotspot Image</source></trans-unit>
       <trans-unit id="tt_content.CType.aistea_lp_hotspot_image.description"><source>Image with clickable hotspot markers that reveal info panels.</source></trans-unit>
+      <trans-unit id="tt_content.CType.aistea_lp_interview_boxes"><source>LP Interview Boxes</source></trans-unit>
+      <trans-unit id="tt_content.CType.aistea_lp_interview_boxes.description"><source>Card grid for 3-4 video interviews with name and short statement.</source></trans-unit>
       <trans-unit id="tt_content.CType.aistea_hero_sequenz"><source>Hero Image Sequence</source></trans-unit>
+      <trans-unit id="group.aistea"><source>Aistea Builder</source></trans-unit>
       <trans-unit id="wizard.description"><source>Desktop image sequence animation based on a TYPO3 folder file collection.</source></trans-unit>
       <trans-unit id="tabs.slides"><source>Slides</source></trans-unit>
       <trans-unit id="tabs.media"><source>Media</source></trans-unit>
       <trans-unit id="tabs.hotspots"><source>Hotspots</source></trans-unit>
+      <trans-unit id="tabs.interviews"><source>Interviews</source></trans-unit>
 
       <trans-unit id="tt_content.tx_aistealpproductslider_layout_mode"><source>Layout mode</source></trans-unit>
       <trans-unit id="tt_content.tx_aistealpproductslider_breakpoint_mobile"><source>Mobile breakpoint (px)</source></trans-unit>
@@ -62,6 +66,7 @@
 
       <trans-unit id="tt_content.tx_aistealpproductslider_hi_image"><source>Background image</source></trans-unit>
       <trans-unit id="tt_content.tx_aistealpproductslider_hi_hotspots"><source>Hotspots</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_interviews"><source>Interview boxes</source></trans-unit>
       <trans-unit id="tt_content.file_collection"><source>Frame file collection</source></trans-unit>
       <trans-unit id="tt_content.desktop_fps"><source>Desktop FPS</source></trans-unit>
       <trans-unit id="tt_content.desktop_loop"><source>Desktop loop</source></trans-unit>
@@ -83,6 +88,12 @@
       <trans-unit id="tx_aistealpproductslider_hotspot.description"><source>Description</source></trans-unit>
       <trans-unit id="tx_aistealpproductslider_hotspot.pos_x"><source>Position X (%)</source></trans-unit>
       <trans-unit id="tx_aistealpproductslider_hotspot.pos_y"><source>Position Y (%)</source></trans-unit>
+
+      <trans-unit id="tx_aistealpproductslider_interview"><source>Interview box</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_interview.title"><source>Name</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_interview.subline"><source>Subline</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_interview.bodytext"><source>Statement</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_interview.media_video"><source>Video (Vimeo, MP4 or WebM)</source></trans-unit>
 
       <trans-unit id="tx_aistealpproductslider_slide"><source>Product slider slide</source></trans-unit>
       <trans-unit id="tx_aistealpproductslider_slide.title"><source>Title</source></trans-unit>
