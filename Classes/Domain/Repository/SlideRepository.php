@@ -9,10 +9,13 @@ use Doctrine\DBAL\ParameterType;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\FrontendRestrictionContainer;
 
-final readonly class SlideRepository
+final class SlideRepository
 {
-    public function __construct(private ConnectionPool $connectionPool)
+    private ConnectionPool $connectionPool;
+
+    public function __construct(ConnectionPool $connectionPool)
     {
+        $this->connectionPool = $connectionPool;
     }
 
     /**
@@ -40,7 +43,12 @@ final readonly class SlideRepository
             ->fetchAllAssociative();
 
         if ($languageId <= 0) {
-            return array_values(array_filter($rows, static fn (array $row): bool => (int)$row['sys_language_uid'] <= 0));
+            return array_values(array_filter(
+                $rows,
+                static function (array $row): bool {
+                    return (int)$row['sys_language_uid'] <= 0;
+                }
+            ));
         }
 
         return $this->overlayRows($rows, $languageId);
@@ -84,7 +92,9 @@ final readonly class SlideRepository
 
         usort(
             $result,
-            static fn (array $a, array $b): int => ((int)$a['sorting']) <=> ((int)$b['sorting'])
+            static function (array $a, array $b): int {
+                return ((int)$a['sorting']) <=> ((int)$b['sorting']);
+            }
         );
 
         return $result;

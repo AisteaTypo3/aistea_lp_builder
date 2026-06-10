@@ -82,7 +82,9 @@ final class HeroFrameResolver
 
         usort(
             $imageFiles,
-            static fn (FileInterface $a, FileInterface $b): int => strnatcasecmp($a->getName(), $b->getName())
+            static function (FileInterface $a, FileInterface $b): int {
+                return strnatcasecmp($a->getName(), $b->getName());
+            }
         );
 
         $resolvedFrames = [];

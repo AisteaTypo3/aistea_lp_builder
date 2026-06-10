@@ -9,13 +9,20 @@ use Doctrine\DBAL\ParameterType;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 
-final readonly class SlideDataService
+final class SlideDataService
 {
+    private SlideRepository $slideRepository;
+    private ResourceFactory $resourceFactory;
+    private ConnectionPool $connectionPool;
+
     public function __construct(
-        private SlideRepository $slideRepository,
-        private ResourceFactory $resourceFactory,
-        private ConnectionPool $connectionPool,
+        SlideRepository $slideRepository,
+        ResourceFactory $resourceFactory,
+        ConnectionPool $connectionPool,
     ) {
+        $this->slideRepository = $slideRepository;
+        $this->resourceFactory = $resourceFactory;
+        $this->connectionPool = $connectionPool;
     }
 
     /**
@@ -25,8 +32,9 @@ final readonly class SlideDataService
     {
         $slides = $this->slideRepository->findByContentElement($contentElementUid, $languageId);
 
-        return array_map(function (array $slide): array {
-            return [
+        $result = [];
+        foreach ($slides as $slide) {
+            $result[] = [
                 'uid' => (int)$slide['uid'],
                 'type' => (string)$slide['slide_type'],
                 'title' => (string)$slide['title'],
@@ -34,7 +42,9 @@ final readonly class SlideDataService
                 'ariaLabel' => trim((string)($slide['aria_label'] ?? '')),
                 'fallbackImage' => $this->resolveFallbackImage((int)$slide['uid'], (string)$slide['slide_type']),
             ];
-        }, $slides);
+        }
+
+        return $result;
     }
 
     /**
@@ -103,13 +113,23 @@ final readonly class SlideDataService
 
     private function resolveFallbackImage(int $slideUid, string $slideType): string
     {
-        return match ($slideType) {
-            'image' => $this->getFileUrl($slideUid, 'media_image'),
-            'video' => $this->getFileUrl($slideUid, 'video_poster') ?: $this->getFileUrl($slideUid, 'video_startframe'),
-            'model3d' => $this->getFileUrl($slideUid, 'model_poster'),
-            'colorGallery' => $this->extractFirstColorVariantImage($slideUid),
-            default => '',
-        };
+        if ($slideType === 'image') {
+            return $this->getFileUrl($slideUid, 'media_image');
+        }
+
+        if ($slideType === 'video') {
+            return $this->getFileUrl($slideUid, 'video_poster') ?: $this->getFileUrl($slideUid, 'video_startframe');
+        }
+
+        if ($slideType === 'model3d') {
+            return $this->getFileUrl($slideUid, 'model_poster');
+        }
+
+        if ($slideType === 'colorGallery') {
+            return $this->extractFirstColorVariantImage($slideUid);
+        }
+
+        return '';
     }
 
     private function extractFirstColorVariantImage(int $slideUid): string
