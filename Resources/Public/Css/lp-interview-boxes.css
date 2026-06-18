@@ -188,9 +188,18 @@
   }
 
   .aistea-ib__grid--count-1 .aistea-ib__media {
+    grid-row: auto;
     min-height: 0;
+    height: unset;
     border-right: 0;
     border-bottom: 1px solid rgb(0 0 0 / 12%);
+  }
+
+  .aistea-ib__grid--count-1 .aistea-ib__person,
+  .aistea-ib__grid--count-1 .aistea-ib__statement {
+    grid-column: auto;
+    grid-row: auto;
+    align-self: auto;
   }
 }
 
