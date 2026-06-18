@@ -140,7 +140,10 @@
   }
 
   .aistea-hb__name {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
+  }
+  h2 span.subline {
+      font-size: 1.4rem!important;
   }
 }
 
