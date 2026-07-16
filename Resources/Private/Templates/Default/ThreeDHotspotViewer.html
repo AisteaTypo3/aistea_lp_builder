@@ -1,0 +1,110 @@
+<f:asset.css identifier="aistea-lp-3d-hotspot-viewer-css" href="EXT:aistea_lp_builder/Resources/Public/Css/lp-3d-hotspot-viewer.css" />
+<f:asset.script identifier="aistea-lp-3d-hotspot-viewer-js" src="EXT:aistea_lp_builder/Resources/Public/JavaScript/lp-3d-hotspot-viewer.js" defer="1" />
+
+<section
+  class="aistea-3dhv"
+  data-aistea-3dhv
+  data-hotspots="{threeDHotspotViewer.hotspotsJson}"
+  data-model-url="{threeDHotspotViewer.modelUrl}"
+  data-poster-url="{threeDHotspotViewer.posterUrl}"
+  data-env-map-url="{threeDHotspotViewer.envMapUrl}"
+  data-background-color="{threeDHotspotViewer.backgroundColor}"
+  data-debug-picker="{f:if(condition: threeDHotspotViewer.debugPickerEnabled, then: '1', else: '0')}"
+  data-three-url="{f:uri.resource(path:'JavaScript/Vendor/three.module.js', extensionName:'AisteaLpBuilder')}"
+  data-gltf-loader-url="{f:uri.resource(path:'JavaScript/Vendor/GLTFLoader.js', extensionName:'AisteaLpBuilder')}"
+>
+  <div class="aistea-3dhv__layout">
+    <div class="aistea-3dhv__viewerCard">
+      <f:if condition="{data.header}">
+        <header class="aistea-3dhv__header">
+          <p class="aistea-3dhv__kicker">3D Focus Viewer</p>
+          <h2 class="aistea-3dhv__title">{data.header}</h2>
+        </header>
+      </f:if>
+
+      <div class="aistea-3dhv__stage" style="--aistea-3dhv-bg:{threeDHotspotViewer.backgroundColor}">
+        <div class="aistea-3dhv__posterWrap" data-aistea-3dhv-poster>
+          <f:if condition="{threeDHotspotViewer.posterUrl}">
+            <img
+              class="aistea-3dhv__poster"
+              src="{threeDHotspotViewer.posterUrl}"
+              alt="{data.header}"
+              loading="lazy"
+            />
+          </f:if>
+        </div>
+        <canvas class="aistea-3dhv__canvas" data-aistea-3dhv-canvas aria-label="{data.header}"></canvas>
+        <div class="aistea-3dhv__overlay" data-aistea-3dhv-overlay>
+          <f:for each="{threeDHotspotViewer.hotspots}" as="hotspot" iteration="iter">
+            <button
+              type="button"
+              class="aistea-3dhv__hotspot"
+              data-hotspot-index="{iter.index}"
+              aria-label="{hotspot.title}"
+            >
+              <span class="aistea-3dhv__hotspotNumber" aria-hidden="true">{iter.cycle}</span>
+            </button>
+          </f:for>
+        </div>
+        <div class="aistea-3dhv__toolbar">
+          <button type="button" class="aistea-3dhv__toolBtn" data-aistea-3dhv-reset aria-label="Reset view" title="Reset view">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M20 11a8 8 0 1 1-2.34-5.66" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M20 4v6h-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+        <f:if condition="{threeDHotspotViewer.hotspots}">
+          <nav class="aistea-3dhv__dock" aria-label="Hotspots">
+            <div class="aistea-3dhv__dockList" data-aistea-3dhv-nav>
+              <f:for each="{threeDHotspotViewer.hotspots}" as="hotspot" iteration="iter">
+                <button
+                  type="button"
+                  class="aistea-3dhv__dockItem<f:if condition='{iter.isFirst}'> is-active</f:if>"
+                  data-aistea-3dhv-nav-item
+                  data-hotspot-index="{iter.index}"
+                  aria-label="{hotspot.title}"
+                >
+                  <span class="aistea-3dhv__dockIndex">{iter.cycle}</span>
+                </button>
+              </f:for>
+            </div>
+          </nav>
+        </f:if>
+        <div class="aistea-3dhv__status" data-aistea-3dhv-status>Loading 3D model...</div>
+        <div class="aistea-3dhv__debug" data-aistea-3dhv-debug hidden>
+          <p class="aistea-3dhv__debugTitle">Hotspot Picker</p>
+          <p class="aistea-3dhv__debugHint">Click the model to capture x/y/z.</p>
+          <pre class="aistea-3dhv__debugCoords" data-aistea-3dhv-debug-coords></pre>
+          <div class="aistea-3dhv__debugActions">
+            <button type="button" class="aistea-3dhv__debugCopy" data-aistea-3dhv-debug-copy="json">Copy JSON</button>
+            <button type="button" class="aistea-3dhv__debugCopy" data-aistea-3dhv-debug-copy="x">Copy X</button>
+            <button type="button" class="aistea-3dhv__debugCopy" data-aistea-3dhv-debug-copy="y">Copy Y</button>
+            <button type="button" class="aistea-3dhv__debugCopy" data-aistea-3dhv-debug-copy="z">Copy Z</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="aistea-3dhv__infoCard" data-aistea-3dhv-info>
+      <f:if condition="{data.bodytext}">
+        <p class="aistea-3dhv__eyebrow">{data.bodytext}</p>
+      </f:if>
+
+      <f:if condition="{threeDHotspotViewer.initialHotspot}">
+        <div class="aistea-3dhv__copy" data-aistea-3dhv-copy>
+          <p class="aistea-3dhv__copyRule"></p>
+          <h3 class="aistea-3dhv__copyTitle">{threeDHotspotViewer.initialHotspot.title}</h3>
+          <p class="aistea-3dhv__copyBody">{threeDHotspotViewer.initialHotspot.description}</p>
+        </div>
+      </f:if>
+      <f:if condition="!{threeDHotspotViewer.initialHotspot}">
+        <div class="aistea-3dhv__copy is-empty" data-aistea-3dhv-copy>
+          <p class="aistea-3dhv__copyRule"></p>
+          <h3 class="aistea-3dhv__copyTitle">No hotspots configured</h3>
+          <p class="aistea-3dhv__copyBody">Add hotspot records to show contextual information next to the 3D model.</p>
+        </div>
+      </f:if>
+    </aside>
+  </div>
+</section>

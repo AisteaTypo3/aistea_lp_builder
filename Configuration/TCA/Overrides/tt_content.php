@@ -11,6 +11,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
     $fullScreenVideoContentType = 'aistea_lp_fullscreen_video';
     $beforeAfterContentType = 'aistea_lp_before_after';
     $hotspotImageContentType = 'aistea_lp_hotspot_image';
+    $threeDHotspotViewerContentType = 'aistea_lp_3d_hotspot_viewer';
     $interviewBoxesContentType = 'aistea_lp_interview_boxes';
     $highlightBoxesContentType = 'aistea_lp_highlight_boxes';
     $heroSequenzContentType = 'aistea_hero_sequenz';
@@ -81,6 +82,16 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
             'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.CType.aistea_lp_hotspot_image',
             'value' => $hotspotImageContentType,
             'icon' => 'aistea-lp-hotspot-image-ce',
+            'group' => $builderGroup,
+        ]
+    );
+    ExtensionManagementUtility::addTcaSelectItem(
+        'tt_content',
+        'CType',
+        [
+            'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.CType.aistea_lp_3d_hotspot_viewer',
+            'value' => $threeDHotspotViewerContentType,
+            'icon' => 'aistea-lp-3d-hotspot-viewer-ce',
             'group' => $builderGroup,
         ]
     );
@@ -467,6 +478,84 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
                 'minitems' => 0,
             ],
         ],
+        'tx_aistealpproductslider_3dhv_model' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.tx_aistealpproductslider_3dhv_model',
+            'config' => [
+                'type' => 'file',
+                'allowed' => 'glb,gltf',
+                'maxitems' => 1,
+                'minitems' => 1,
+            ],
+        ],
+        'tx_aistealpproductslider_3dhv_poster' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.tx_aistealpproductslider_3dhv_poster',
+            'config' => [
+                'type' => 'file',
+                'allowed' => 'common-image-types',
+                'maxitems' => 1,
+                'minitems' => 0,
+            ],
+        ],
+        'tx_aistealpproductslider_3dhv_env_map' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.tx_aistealpproductslider_3dhv_env_map',
+            'config' => [
+                'type' => 'file',
+                'allowed' => 'jpg,jpeg,png,webp,avif',
+                'maxitems' => 1,
+                'minitems' => 0,
+            ],
+        ],
+        'tx_aistealpproductslider_3dhv_hotspots' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.tx_aistealpproductslider_3dhv_hotspots',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_aistealpproductslider_3dhotspot',
+                'foreign_field' => 'parentid',
+                'foreign_table_field' => 'parenttable',
+                'foreign_sortby' => 'sorting',
+                'appearance' => [
+                    'expandSingle' => true,
+                    'useSortable' => true,
+                    'enabledControls' => [
+                        'info' => true,
+                        'new' => true,
+                        'dragdrop' => true,
+                        'sort' => true,
+                        'hide' => true,
+                        'delete' => true,
+                        'localize' => true,
+                    ],
+                ],
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
+                'minitems' => 0,
+            ],
+        ],
+        'tx_aistealpproductslider_3dhv_background_color' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.tx_aistealpproductslider_3dhv_background_color',
+            'config' => [
+                'type' => 'input',
+                'eval' => 'trim',
+                'max' => 32,
+                'default' => '#0f1014',
+                'placeholder' => '#0f1014',
+            ],
+        ],
+        'tx_aistealpproductslider_3dhv_debug_picker' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.tx_aistealpproductslider_3dhv_debug_picker',
+            'config' => [
+                'type' => 'check',
+                'renderType' => 'checkboxToggle',
+                'default' => 0,
+            ],
+        ],
         'tx_aistealpproductslider_interviews' => [
             'exclude' => true,
             'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.tx_aistealpproductslider_interviews',
@@ -824,6 +913,43 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
             'header' => [
                 'config' => [
                     'placeholder' => 'Hotspot Image',
+                ],
+            ],
+        ],
+    ];
+
+    $threeDHotspotViewerShowItem = '
+        --palette--;;general,
+        --palette--;;headers,
+        bodytext,
+        tx_aistealpproductslider_3dhv_model,
+        tx_aistealpproductslider_3dhv_poster,
+        tx_aistealpproductslider_3dhv_env_map,
+        tx_aistealpproductslider_3dhv_background_color,
+        tx_aistealpproductslider_3dhv_debug_picker,
+        --div--;LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tabs.hotspots,
+        tx_aistealpproductslider_3dhv_hotspots,
+        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
+        --palette--;;hidden,
+        --palette--;;access,
+        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:categories,
+        categories,
+        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:notes,
+        rowDescription
+    ';
+
+    $GLOBALS['TCA']['tt_content']['types'][$threeDHotspotViewerContentType] = [
+        'showitem' => $threeDHotspotViewerShowItem,
+        'previewRenderer' => \Aistea\LpBuilder\Backend\ContentElementPreviewRenderer::class,
+        'columnsOverrides' => [
+            'header' => [
+                'config' => [
+                    'placeholder' => '3D Hotspot Viewer',
+                ],
+            ],
+            'bodytext' => [
+                'config' => [
+                    'placeholder' => 'Optional intro text above the hotspot detail panel.',
                 ],
             ],
         ],

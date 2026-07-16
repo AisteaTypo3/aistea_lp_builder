@@ -70,6 +70,18 @@ tt_content.aistea_lp_hotspot_image {
   }
 }
 
+tt_content.aistea_lp_3d_hotspot_viewer =< lib.contentElement
+tt_content.aistea_lp_3d_hotspot_viewer {
+  templateName = ThreeDHotspotViewer
+  templateRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Templates/
+  partialRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Partials/
+  layoutRootPaths.100 = EXT:aistea_lp_builder/Resources/Private/Layouts/
+
+  dataProcessing {
+    10 = Aistea\LpBuilder\DataProcessing\ThreeDHotspotViewerDataProcessor
+  }
+}
+
 tt_content.aistea_lp_interview_boxes =< lib.contentElement
 tt_content.aistea_lp_interview_boxes {
   templateName = InterviewBoxes

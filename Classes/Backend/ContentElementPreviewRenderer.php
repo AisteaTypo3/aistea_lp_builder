@@ -21,6 +21,7 @@ final class ContentElementPreviewRenderer extends StandardContentPreviewRenderer
             'aistea_lp_fullscreen_video' => $this->renderFullScreenVideoPreview($record),
             'aistea_lp_before_after' => $this->renderBeforeAfterPreview($record),
             'aistea_lp_hotspot_image' => $this->renderHotspotImagePreview($record),
+            'aistea_lp_3d_hotspot_viewer' => $this->renderThreeDHotspotViewerPreview($record),
             'aistea_lp_interview_boxes' => $this->renderInterviewBoxesPreview($record),
             'aistea_lp_highlight_boxes' => $this->renderHighlightBoxesPreview($record),
             'aistea_hero_sequenz' => $this->renderHeroSequencePreview($record),
@@ -143,6 +144,21 @@ final class ContentElementPreviewRenderer extends StandardContentPreviewRenderer
             [
                 $this->badge('Image', $this->boolLabel((int)($record['tx_aistealpproductslider_hi_image'] ?? 0) > 0)),
                 $this->badge('Hotspots', (int)($record['tx_aistealpproductslider_hi_hotspots'] ?? 0)),
+            ]
+        );
+    }
+
+    /**
+     * @param array<string, mixed> $record
+     */
+    private function renderThreeDHotspotViewerPreview(array $record): string
+    {
+        return $this->wrapPreview(
+            'Standalone 3D model viewer with clickable hotspots and a right-side detail panel.',
+            [
+                $this->badge('Model', $this->boolLabel((int)($record['tx_aistealpproductslider_3dhv_model'] ?? 0) > 0)),
+                $this->badge('Poster', $this->boolLabel((int)($record['tx_aistealpproductslider_3dhv_poster'] ?? 0) > 0)),
+                $this->badge('Hotspots', (int)($record['tx_aistealpproductslider_3dhv_hotspots'] ?? 0)),
             ]
         );
     }

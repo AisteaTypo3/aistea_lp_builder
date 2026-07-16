@@ -15,6 +15,8 @@
       <trans-unit id="tt_content.CType.aistea_lp_before_after.description"><source>Drag-handle image comparison with before and after states.</source></trans-unit>
       <trans-unit id="tt_content.CType.aistea_lp_hotspot_image"><source>LP Hotspot Image</source></trans-unit>
       <trans-unit id="tt_content.CType.aistea_lp_hotspot_image.description"><source>Image with clickable hotspot markers that reveal info panels.</source></trans-unit>
+      <trans-unit id="tt_content.CType.aistea_lp_3d_hotspot_viewer"><source>LP 3D Hotspot Viewer</source></trans-unit>
+      <trans-unit id="tt_content.CType.aistea_lp_3d_hotspot_viewer.description"><source>Standalone 3D model viewer with clickable hotspots and a side detail panel.</source></trans-unit>
       <trans-unit id="tt_content.CType.aistea_lp_interview_boxes"><source>LP Interview Boxes</source></trans-unit>
       <trans-unit id="tt_content.CType.aistea_lp_interview_boxes.description"><source>Card grid for 3-4 video interviews with name and short statement.</source></trans-unit>
       <trans-unit id="tt_content.CType.aistea_lp_highlight_boxes"><source>LP Highlight Boxes</source></trans-unit>
@@ -69,6 +71,12 @@
 
       <trans-unit id="tt_content.tx_aistealpproductslider_hi_image"><source>Background image</source></trans-unit>
       <trans-unit id="tt_content.tx_aistealpproductslider_hi_hotspots"><source>Hotspots</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_3dhv_model"><source>3D model (GLB/GLTF)</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_3dhv_poster"><source>Poster image</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_3dhv_env_map"><source>Environment map</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_3dhv_hotspots"><source>3D hotspots</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_3dhv_background_color"><source>Viewer background color</source></trans-unit>
+      <trans-unit id="tt_content.tx_aistealpproductslider_3dhv_debug_picker"><source>Enable hotspot coordinate picker</source></trans-unit>
       <trans-unit id="tt_content.tx_aistealpproductslider_interviews"><source>Interview boxes</source></trans-unit>
       <trans-unit id="tt_content.tx_aistealpproductslider_highlights"><source>Highlight boxes</source></trans-unit>
       <trans-unit id="tt_content.file_collection"><source>Frame file collection</source></trans-unit>
@@ -93,6 +101,12 @@
       <trans-unit id="tx_aistealpproductslider_hotspot.description"><source>Description</source></trans-unit>
       <trans-unit id="tx_aistealpproductslider_hotspot.pos_x"><source>Position X (%)</source></trans-unit>
       <trans-unit id="tx_aistealpproductslider_hotspot.pos_y"><source>Position Y (%)</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_3dhotspot"><source>3D Hotspot</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_3dhotspot.title"><source>Title</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_3dhotspot.description"><source>Description</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_3dhotspot.pos_x"><source>Position X</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_3dhotspot.pos_y"><source>Position Y</source></trans-unit>
+      <trans-unit id="tx_aistealpproductslider_3dhotspot.pos_z"><source>Position Z</source></trans-unit>
 
       <trans-unit id="tx_aistealpproductslider_interview"><source>Interview box</source></trans-unit>
       <trans-unit id="tx_aistealpproductslider_interview.title"><source>Name</source></trans-unit>

@@ -27,6 +27,10 @@ return [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => 'EXT:aistea_lp_builder/Resources/Public/Icons/ContentHotspotImage.svg',
     ],
+    'aistea-lp-3d-hotspot-viewer-ce' => [
+        'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        'source' => 'EXT:aistea_lp_builder/Resources/Public/Icons/ContentHotspotImage.svg',
+    ],
     'aistea-lp-interview-boxes-ce' => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => 'EXT:aistea_lp_builder/Resources/Public/Icons/ContentProductSlider.svg',
