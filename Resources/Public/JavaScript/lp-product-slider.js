@@ -59,12 +59,20 @@
 
     getDracoLoaderUrl(gltfLoaderUrl) {
       if (!gltfLoaderUrl) return '';
-      return new URL('DRACOLoader.js', new URL(gltfLoaderUrl, window.location.href)).toString();
+      try {
+        return new URL('DRACOLoader.js', new URL(gltfLoaderUrl, document.baseURI)).toString();
+      } catch (_) {
+        return '';
+      }
     }
 
     getDracoDecoderPath(dracoLoaderUrl) {
       if (!dracoLoaderUrl) return '';
-      return new URL('./draco/', new URL(dracoLoaderUrl, window.location.href)).toString();
+      try {
+        return new URL('./draco/', new URL(dracoLoaderUrl, document.baseURI)).toString();
+      } catch (_) {
+        return '';
+      }
     }
 
     bindTabEvents() {
@@ -778,6 +786,8 @@
         blau_titanium: 'titanium',
         blue_titanium: 'titanium',
         a_5850: 'titanium',
+        titan_blue: 'titanBlue',
+        titan_darkblue: 'titanDarkblue',
         red: 'redBone',
         red_bone: 'redBone',
         bone: 'whiteBone',
@@ -834,6 +844,20 @@
           metalness: 1.0,
           roughness: 0.25,
           envMapIntensity: 4.5,
+          side: THREE.DoubleSide,
+        }),
+        titanBlue: new THREE.MeshStandardMaterial({
+          color: 0x35548c,
+          metalness: 1.0,
+          roughness: 0.25,
+          envMapIntensity: 4.0,
+          side: THREE.DoubleSide,
+        }),
+        titanDarkblue: new THREE.MeshStandardMaterial({
+          color: 0x142850,
+          metalness: 1.0,
+          roughness: 0.28,
+          envMapIntensity: 4.0,
           side: THREE.DoubleSide,
         }),
         redBone: new THREE.MeshStandardMaterial({

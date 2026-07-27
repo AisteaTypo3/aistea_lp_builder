@@ -26,6 +26,7 @@
       this.dracoLoaderUrl = root.dataset.dracoLoaderUrl || this.getDracoLoaderUrl(this.gltfLoaderUrl);
       this.backgroundColor = root.dataset.backgroundColor || '#0f1014';
       this.debugPickerEnabled = root.dataset.debugPicker === '1';
+      this.glassBoneEnabled = root.dataset.glassBone === '1';
 
       this.runtime = null;
       this.renderer = null;
@@ -59,12 +60,20 @@
 
     getDracoLoaderUrl(gltfLoaderUrl) {
       if (!gltfLoaderUrl) return '';
-      return new URL('DRACOLoader.js', new URL(gltfLoaderUrl, window.location.href)).toString();
+      try {
+        return new URL('DRACOLoader.js', new URL(gltfLoaderUrl, document.baseURI)).toString();
+      } catch (_) {
+        return '';
+      }
     }
 
     getDracoDecoderPath(dracoLoaderUrl) {
       if (!dracoLoaderUrl) return '';
-      return new URL('./draco/', new URL(dracoLoaderUrl, window.location.href)).toString();
+      try {
+        return new URL('./draco/', new URL(dracoLoaderUrl, document.baseURI)).toString();
+      } catch (_) {
+        return '';
+      }
     }
 
     async init() {
@@ -181,8 +190,10 @@
     }
 
     createMaterialLibrary(THREE) {
-      return {
+      const materials = {
         titanium: new THREE.MeshStandardMaterial({ color: 0x2a3b4d, metalness: 1.0, roughness: 0.25, envMapIntensity: 4.5, side: THREE.DoubleSide }),
+        titanBlue: new THREE.MeshStandardMaterial({ color: 0x35548c, metalness: 1.0, roughness: 0.25, envMapIntensity: 4.0, side: THREE.DoubleSide }),
+        titanDarkblue: new THREE.MeshStandardMaterial({ color: 0x142850, metalness: 1.0, roughness: 0.28, envMapIntensity: 4.0, side: THREE.DoubleSide }),
         redBone: new THREE.MeshStandardMaterial({ color: 0x660000, metalness: 0.1, roughness: 0.6, envMapIntensity: 0.7, side: THREE.DoubleSide }),
         whiteBone: new THREE.MeshStandardMaterial({ color: 0xdcdce0, metalness: 0.1, roughness: 0.65, envMapIntensity: 0.6, side: THREE.DoubleSide }),
         purpleMetal: new THREE.MeshStandardMaterial({ color: 0x2a1558, metalness: 1.0, roughness: 0.3, envMapIntensity: 3.0, side: THREE.DoubleSide }),
@@ -193,6 +204,19 @@
         teeth: new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.0, roughness: 0.3, envMapIntensity: 1.5, side: THREE.DoubleSide }),
         thread: new THREE.MeshStandardMaterial({ color: 0x303030, metalness: 0.6, roughness: 0.7, envMapIntensity: 1.0, side: THREE.DoubleSide }),
       };
+
+      if (this.glassBoneEnabled) {
+        [materials.redBone, materials.whiteBone, materials.cartilage].forEach((material) => {
+          material.transparent = true;
+          material.opacity = 0.28;
+          material.depthWrite = false;
+          material.roughness = 0.15;
+          material.metalness = 0.0;
+          material.envMapIntensity = 1.2;
+        });
+      }
+
+      return materials;
     }
 
     async loadModel() {
@@ -244,6 +268,8 @@
             blau_titanium: this.materials.titanium,
             blue_titanium: this.materials.titanium,
             a_5850: this.materials.titanium,
+            titan_blue: this.materials.titanBlue,
+            titan_darkblue: this.materials.titanDarkblue,
             red_bone: this.materials.redBone,
             red: this.materials.redBone,
             bone: this.materials.whiteBone,

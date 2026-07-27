@@ -43,6 +43,7 @@ final class ThreeDHotspotViewerDataProcessor implements DataProcessorInterface
             'envMapUrl' => $this->getFileUrl($connectionPool, $resourceFactory, $contentUid, 'tx_aistealpproductslider_3dhv_env_map'),
             'backgroundColor' => $backgroundColor !== '' ? $backgroundColor : '#0f1014',
             'debugPickerEnabled' => (int)($data['tx_aistealpproductslider_3dhv_debug_picker'] ?? 0) === 1,
+            'glassBoneEnabled' => (int)($data['tx_aistealpproductslider_3dhv_glass_bone'] ?? 0) === 1,
             'hotspots' => $hotspots,
             'hotspotsJson' => json_encode($hotspots, JSON_THROW_ON_ERROR | JSON_HEX_TAG),
             'initialHotspot' => $initialHotspot,

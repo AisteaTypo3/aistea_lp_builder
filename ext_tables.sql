@@ -12,6 +12,7 @@ CREATE TABLE tt_content (
   tx_aistealpproductslider_3dhv_hotspots int(11) unsigned DEFAULT '0' NOT NULL,
   tx_aistealpproductslider_3dhv_background_color varchar(32) DEFAULT '#0f1014' NOT NULL,
   tx_aistealpproductslider_3dhv_debug_picker tinyint(1) unsigned DEFAULT '0' NOT NULL,
+  tx_aistealpproductslider_3dhv_glass_bone tinyint(1) unsigned DEFAULT '0' NOT NULL,
   tx_aistealpproductslider_interviews int(11) unsigned DEFAULT '0' NOT NULL,
   tx_aistealpproductslider_highlights int(11) unsigned DEFAULT '0' NOT NULL,
   tx_aistealpproductslider_slides int(11) unsigned DEFAULT '0' NOT NULL,

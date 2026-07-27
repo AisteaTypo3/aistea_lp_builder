@@ -556,6 +556,15 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
                 'default' => 0,
             ],
         ],
+        'tx_aistealpproductslider_3dhv_glass_bone' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.tx_aistealpproductslider_3dhv_glass_bone',
+            'config' => [
+                'type' => 'check',
+                'renderType' => 'checkboxToggle',
+                'default' => 0,
+            ],
+        ],
         'tx_aistealpproductslider_interviews' => [
             'exclude' => true,
             'label' => 'LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tt_content.tx_aistealpproductslider_interviews',
@@ -927,6 +936,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
         tx_aistealpproductslider_3dhv_env_map,
         tx_aistealpproductslider_3dhv_background_color,
         tx_aistealpproductslider_3dhv_debug_picker,
+        tx_aistealpproductslider_3dhv_glass_bone,
         --div--;LLL:EXT:aistea_lp_builder/Resources/Private/Language/locallang_db.xlf:tabs.hotspots,
         tx_aistealpproductslider_3dhv_hotspots,
         --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
