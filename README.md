@@ -39,7 +39,11 @@ The package declares Composer `replace` entries for the two old packages so they
 
 - `Resources/Public/JavaScript/Vendor/three.module.js`
 - `Resources/Public/JavaScript/Vendor/GLTFLoader.js`
+- `Resources/Public/JavaScript/Vendor/DRACOLoader.js` plus `Vendor/draco/` decoder assets
 
 The provided files are placeholders. For production 3D rendering, replace them with the official ESM files from the Three.js project (same filenames).
 
 No external CDN is required.
+
+Both 3D viewers accept standard GLB/glTF files and models using
+`KHR_draco_mesh_compression` automatically.

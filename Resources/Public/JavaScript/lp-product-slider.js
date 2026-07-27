@@ -19,6 +19,7 @@
       this.preloadStrategy = root.dataset.preloadStrategy || 'smart';
       this.threeUrl = root.dataset.threeUrl || '';
       this.gltfLoaderUrl = root.dataset.gltfLoaderUrl || '';
+      this.dracoLoaderUrl = root.dataset.dracoLoaderUrl || this.getDracoLoaderUrl(this.gltfLoaderUrl);
       this.ceUid = root.dataset.ceUid || '';
       this.prevButton = root.querySelector('.aistea-pv__nav--prev');
       this.nextButton = root.querySelector('.aistea-pv__nav--next');
@@ -54,6 +55,11 @@
       this.bindMobileTabSnap();
       this.bindStageNavigation();
       this.observeViewport();
+    }
+
+    getDracoLoaderUrl(gltfLoaderUrl) {
+      if (!gltfLoaderUrl) return '';
+      return new URL('DRACOLoader.js', gltfLoaderUrl).toString();
     }
 
     bindTabEvents() {
@@ -528,6 +534,7 @@
         const runtime = await this.getThreeRuntime();
         const THREE = runtime.THREE;
         const GLTFLoader = runtime.GLTFLoader;
+        const DRACOLoader = runtime.DRACOLoader;
 
         const scene = new THREE.Scene();
         const width = this.stage.clientWidth || 800;
@@ -562,6 +569,11 @@
         scene.add(hemi, key);
 
         const loader = new GLTFLoader();
+        if (DRACOLoader) {
+          const dracoLoader = new DRACOLoader();
+          dracoLoader.setDecoderPath(new URL('./draco/', this.dracoLoaderUrl).toString());
+          loader.setDRACOLoader(dracoLoader);
+        }
         const gltf = await loader.loadAsync(slide.modelUrl);
         scene.add(gltf.scene);
         await this.applyMappedMaterials(gltf.scene, scene, renderer, slide.envMapUrl, THREE);
@@ -610,12 +622,16 @@
       const localThree = this.threeUrl || '';
       const localLoader = this.gltfLoaderUrl || '';
       if (localThree && localLoader) {
-        const threeMod = await import(localThree);
-        const loaderMod = await import(localLoader);
+        const [threeMod, loaderMod, dracoMod] = await Promise.all([
+          import(localThree),
+          import(localLoader),
+          this.dracoLoaderUrl ? import(this.dracoLoaderUrl) : Promise.resolve(null),
+        ]);
         if (threeMod && loaderMod && loaderMod.GLTFLoader) {
           return {
             THREE: threeMod,
             GLTFLoader: loaderMod.GLTFLoader,
+            DRACOLoader: dracoMod && dracoMod.DRACOLoader ? dracoMod.DRACOLoader : null,
           };
         }
       }

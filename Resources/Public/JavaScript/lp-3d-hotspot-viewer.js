@@ -23,6 +23,7 @@
       this.envMapUrl = root.dataset.envMapUrl || '';
       this.threeUrl = root.dataset.threeUrl || '';
       this.gltfLoaderUrl = root.dataset.gltfLoaderUrl || '';
+      this.dracoLoaderUrl = root.dataset.dracoLoaderUrl || this.getDracoLoaderUrl(this.gltfLoaderUrl);
       this.backgroundColor = root.dataset.backgroundColor || '#0f1014';
       this.debugPickerEnabled = root.dataset.debugPicker === '1';
 
@@ -56,6 +57,11 @@
       }
     }
 
+    getDracoLoaderUrl(gltfLoaderUrl) {
+      if (!gltfLoaderUrl) return '';
+      return new URL('DRACOLoader.js', gltfLoaderUrl).toString();
+    }
+
     async init() {
       if (!this.canvas || !this.overlay || !this.copy) {
         return;
@@ -85,8 +91,11 @@
         throw new Error('Viewer dependencies are missing');
       }
 
-      const threeMod = await import(this.threeUrl);
-      const loaderMod = await import(this.gltfLoaderUrl);
+      const [threeMod, loaderMod, dracoMod] = await Promise.all([
+        import(this.threeUrl),
+        import(this.gltfLoaderUrl),
+        this.dracoLoaderUrl ? import(this.dracoLoaderUrl) : Promise.resolve(null),
+      ]);
       const THREE = (threeMod && (threeMod.default || threeMod)) || null;
       const GLTFLoader = loaderMod && loaderMod.GLTFLoader ? loaderMod.GLTFLoader : null;
 
@@ -97,6 +106,7 @@
       return {
         THREE,
         GLTFLoader,
+        DRACOLoader: dracoMod && dracoMod.DRACOLoader ? dracoMod.DRACOLoader : null,
       };
     }
 
@@ -181,8 +191,13 @@
     }
 
     async loadModel() {
-      const { THREE, GLTFLoader } = this.runtime;
+      const { THREE, GLTFLoader, DRACOLoader } = this.runtime;
       const loader = new GLTFLoader();
+      if (DRACOLoader) {
+        const dracoLoader = new DRACOLoader();
+        dracoLoader.setDecoderPath(new URL('./draco/', this.dracoLoaderUrl).toString());
+        loader.setDRACOLoader(dracoLoader);
+      }
       const gltf = await loader.loadAsync(this.modelUrl);
 
       this.model = gltf.scene;
