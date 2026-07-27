@@ -45,6 +45,10 @@
       this.rafId = 0;
       this.activeIndex = this.hotspots.length > 0 ? 0 : -1;
       this.resizeObserver = null;
+      this.visibilityObserver = null;
+      this.booted = false;
+      this.viewportVisible = false;
+      this.handleDocumentVisibilityChange = () => this.maybeToggleRenderLoop();
 
       this.init();
     }
@@ -76,7 +80,7 @@
       }
     }
 
-    async init() {
+    init() {
       if (!this.canvas || !this.overlay || !this.copy) {
         return;
       }
@@ -88,12 +92,49 @@
         return;
       }
 
+      document.addEventListener('visibilitychange', this.handleDocumentVisibilityChange);
+      this.observeVisibility();
+    }
+
+    observeVisibility() {
+      if (!('IntersectionObserver' in window)) {
+        this.handleEnterViewport();
+        return;
+      }
+
+      this.visibilityObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            this.handleEnterViewport();
+          } else {
+            this.viewportVisible = false;
+            this.maybeToggleRenderLoop();
+          }
+        });
+      }, { rootMargin: '400px 0px', threshold: 0.01 });
+
+      this.visibilityObserver.observe(this.root);
+    }
+
+    handleEnterViewport() {
+      this.viewportVisible = true;
+
+      if (this.booted) {
+        this.maybeToggleRenderLoop();
+        return;
+      }
+
+      this.booted = true;
+      this.boot();
+    }
+
+    async boot() {
       try {
         this.runtime = await this.getThreeRuntime();
         this.setupScene();
         await this.loadModel();
         this.observeResize();
-        this.renderLoop();
+        this.maybeToggleRenderLoop();
       } catch (error) {
         const message = error && error.message ? error.message : 'Unknown 3D error';
         this.setStatus(`3D load failed: ${message}`);
@@ -144,6 +185,9 @@
       this.renderer.setSize(width, height, false);
       this.renderer.shadowMap.enabled = true;
       this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      // Scene and lights never move after load, so recomputing the shadow map every
+      // frame is wasted GPU work. Recompute once, manually, when it actually changes.
+      this.renderer.shadowMap.autoUpdate = false;
 
       if ('outputColorSpace' in this.renderer && THREE.SRGBColorSpace) {
         this.renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -235,6 +279,7 @@
       this.fitModelIntoView(THREE);
       this.enableModelInteraction(THREE);
       this.bindDebugPicker();
+      this.renderer.shadowMap.needsUpdate = true;
 
       if (this.poster) {
         this.poster.classList.add('is-hidden');
@@ -671,8 +716,17 @@
       });
     }
 
-    renderLoop() {
-      if (!this.renderer || !this.scene || !this.camera) {
+    maybeToggleRenderLoop() {
+      const shouldRender = this.viewportVisible && document.visibilityState !== 'hidden' && !!this.renderer;
+      if (shouldRender) {
+        this.startRenderLoop();
+      } else {
+        this.stopRenderLoop();
+      }
+    }
+
+    startRenderLoop() {
+      if (this.rafId || !this.renderer || !this.scene || !this.camera) {
         return;
       }
 
@@ -687,7 +741,14 @@
         this.rafId = window.requestAnimationFrame(frame);
       };
 
-      frame();
+      this.rafId = window.requestAnimationFrame(frame);
+    }
+
+    stopRenderLoop() {
+      if (this.rafId) {
+        window.cancelAnimationFrame(this.rafId);
+        this.rafId = 0;
+      }
     }
 
     setStatus(message) {

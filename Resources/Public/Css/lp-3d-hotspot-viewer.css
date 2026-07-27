@@ -2,8 +2,8 @@
   --aistea-3dhv-shell: transparent;
   --aistea-3dhv-surface: rgba(255, 255, 255, 0.04);
   --aistea-3dhv-stage: radial-gradient(circle at 50% 0%, rgba(64, 116, 214, 0.14), transparent 36%), linear-gradient(180deg, #050608 0%, #0a0d12 100%);
-  --aistea-3dhv-text: #f5f7fb;
-  --aistea-3dhv-muted: #98a3b6;
+  --aistea-3dhv-text: #ffffff;
+  --aistea-3dhv-muted: #ffffff;
   --aistea-3dhv-accent: #7cb8ff;
   --aistea-3dhv-border: rgba(255, 255, 255, 0.08);
   color: var(--aistea-3dhv-text);
@@ -100,10 +100,14 @@
   transform: translate(-50%, -50%);
   width: 2.25rem;
   height: 2.25rem;
+  padding: 0;
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 999px;
   background: rgba(12, 15, 19, 0.82);
   color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   pointer-events: auto;
   cursor: pointer;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
@@ -338,9 +342,10 @@
 .aistea-3dhv__copyTitle {
   margin: 0;
   font-size: clamp(1.8rem, 2.8vw, 3rem);
-  font-weight: 640;
-  letter-spacing: -0.05em;
+  font-weight: 500;
+  letter-spacing: 0.02em;
   line-height: 0.96;
+  color: #ffffff;
 }
 
 .aistea-3dhv__copyBody {
@@ -358,6 +363,13 @@
 .aistea-3dhv__copy.is-changing {
   opacity: 0.4;
   transform: translateY(4px);
+}
+
+.whiteBG-section .aistea-3dhv__title,
+.whiteBG-section .aistea-3dhv__eyebrow,
+.whiteBG-section .aistea-3dhv__copyTitle,
+.whiteBG-section .aistea-3dhv__copyBody {
+  color: #000000;
 }
 
 @media (max-width: 980px) {
