@@ -59,7 +59,12 @@
 
     getDracoLoaderUrl(gltfLoaderUrl) {
       if (!gltfLoaderUrl) return '';
-      return new URL('DRACOLoader.js', gltfLoaderUrl).toString();
+      return new URL('DRACOLoader.js', new URL(gltfLoaderUrl, window.location.href)).toString();
+    }
+
+    getDracoDecoderPath(dracoLoaderUrl) {
+      if (!dracoLoaderUrl) return '';
+      return new URL('./draco/', new URL(dracoLoaderUrl, window.location.href)).toString();
     }
 
     async init() {
@@ -195,7 +200,7 @@
       const loader = new GLTFLoader();
       if (DRACOLoader) {
         const dracoLoader = new DRACOLoader();
-        dracoLoader.setDecoderPath(new URL('./draco/', this.dracoLoaderUrl).toString());
+        dracoLoader.setDecoderPath(this.getDracoDecoderPath(this.dracoLoaderUrl));
         loader.setDRACOLoader(dracoLoader);
       }
       const gltf = await loader.loadAsync(this.modelUrl);
