@@ -238,7 +238,7 @@
       const materials = {
         titanium: new THREE.MeshStandardMaterial({ color: 0x2a3b4d, metalness: 1.0, roughness: 0.25, envMapIntensity: 4.5, side: THREE.DoubleSide }),
         titanBlue: new THREE.MeshStandardMaterial({ color: 0x35548c, metalness: 1.0, roughness: 0.25, envMapIntensity: 4.0, side: THREE.DoubleSide }),
-        titanDarkblue: new THREE.MeshStandardMaterial({ color: 0x142850, metalness: 1.0, roughness: 0.28, envMapIntensity: 4.0, side: THREE.DoubleSide }),
+        titanDarkblue: new THREE.MeshStandardMaterial({ color: 0x1c5490, metalness: 1.0, roughness: 0.2, envMapIntensity: 4.5, side: THREE.DoubleSide }),
         redBone: new THREE.MeshStandardMaterial({ color: 0x660000, metalness: 0.1, roughness: 0.6, envMapIntensity: 0.7, side: THREE.DoubleSide }),
         whiteBone: new THREE.MeshStandardMaterial({ color: 0xdcdce0, metalness: 0.1, roughness: 0.65, envMapIntensity: 0.6, side: THREE.DoubleSide }),
         purpleMetal: new THREE.MeshStandardMaterial({ color: 0x2a1558, metalness: 1.0, roughness: 0.3, envMapIntensity: 3.0, side: THREE.DoubleSide }),
