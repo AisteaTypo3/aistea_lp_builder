@@ -523,6 +523,9 @@
       this.debugPanel.hidden = false;
       this.addDebugPickerGizmos();
 
+      this.pickDepthIndex = 0;
+      this.lastPickScreen = null;
+
       this.canvas.addEventListener('click', (event) => {
         if (!this.raycaster || !this.pointerNdc || !this.camera || !this.model) {
           return;
@@ -533,18 +536,34 @@
         this.pointerNdc.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
 
         this.raycaster.setFromCamera(this.pointerNdc, this.camera);
-        const intersections = this.raycaster.intersectObject(this.model, true);
+        const intersections = this.raycaster.intersectObject(this.model, true)
+          .filter((hit) => hit.object !== this.pickMarker);
         if (!intersections.length) {
           return;
         }
 
-        const localPoint = this.model.worldToLocal(intersections[0].point.clone());
+        const samePosition = this.lastPickScreen
+          && Math.abs(event.clientX - this.lastPickScreen.x) < 4
+          && Math.abs(event.clientY - this.lastPickScreen.y) < 4;
+
+        if (event.shiftKey && samePosition) {
+          this.pickDepthIndex = (this.pickDepthIndex + 1) % intersections.length;
+        } else {
+          this.pickDepthIndex = 0;
+        }
+        this.lastPickScreen = { x: event.clientX, y: event.clientY };
+
+        const hit = intersections[this.pickDepthIndex];
+        const localPoint = this.model.worldToLocal(hit.point.clone());
         this.lastPickedCoords = {
           x: Number(localPoint.x.toFixed(6)),
           y: Number(localPoint.y.toFixed(6)),
           z: Number(localPoint.z.toFixed(6)),
         };
-        this.debugCoords.textContent = JSON.stringify(this.lastPickedCoords, null, 2);
+
+        const materialName = (hit.object && hit.object.material && hit.object.material.name) || hit.object.name || 'unknown';
+        const depthInfo = `// hit ${this.pickDepthIndex + 1}/${intersections.length} — "${materialName}"${intersections.length > 1 ? ' (Shift+Click here to go deeper)' : ''}`;
+        this.debugCoords.textContent = `${depthInfo}\n${JSON.stringify(this.lastPickedCoords, null, 2)}`;
 
         if (this.pickMarker) {
           this.pickMarker.position.copy(localPoint);
