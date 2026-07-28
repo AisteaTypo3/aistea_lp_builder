@@ -38,6 +38,7 @@
       this.raycaster = null;
       this.pointerNdc = null;
       this.lastPickedCoords = null;
+      this.pickMarker = null;
       this.cameraTarget = null;
       this.focusAnimation = null;
       this.defaultCameraPosition = null;
@@ -520,6 +521,7 @@
       }
 
       this.debugPanel.hidden = false;
+      this.addDebugPickerGizmos();
 
       this.canvas.addEventListener('click', (event) => {
         if (!this.raycaster || !this.pointerNdc || !this.camera || !this.model) {
@@ -543,6 +545,11 @@
           z: Number(localPoint.z.toFixed(6)),
         };
         this.debugCoords.textContent = JSON.stringify(this.lastPickedCoords, null, 2);
+
+        if (this.pickMarker) {
+          this.pickMarker.position.copy(localPoint);
+          this.pickMarker.visible = true;
+        }
       });
 
       this.debugCopyButtons.forEach((button) => {
@@ -568,6 +575,25 @@
           }
         });
       });
+    }
+
+    addDebugPickerGizmos() {
+      const THREE = this.runtime.THREE;
+      const box = new THREE.Box3().setFromObject(this.model);
+      const size = box.getSize(new THREE.Vector3());
+      const extent = Math.max(size.x, size.y, size.z) || 2;
+
+      const axesHelper = new THREE.AxesHelper(extent * 0.65);
+      axesHelper.renderOrder = 998;
+      this.model.add(axesHelper);
+
+      this.pickMarker = new THREE.Mesh(
+        new THREE.SphereGeometry(extent * 0.02, 16, 16),
+        new THREE.MeshBasicMaterial({ color: 0xff2d55, depthTest: false })
+      );
+      this.pickMarker.visible = false;
+      this.pickMarker.renderOrder = 999;
+      this.model.add(this.pickMarker);
     }
 
     resetView() {
