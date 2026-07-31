@@ -635,11 +635,12 @@
       const localThree = this.threeUrl || '';
       const localLoader = this.gltfLoaderUrl || '';
       if (localThree && localLoader) {
-        const [threeMod, loaderMod, dracoMod] = await Promise.all([
-          import(localThree),
-          import(localLoader),
-          this.dracoLoaderUrl ? import(this.dracoLoaderUrl) : Promise.resolve(null),
-        ]);
+        // GLTFLoader and DRACOLoader both import Three.js. Safari can evaluate their
+        // bindings before Three.js has completed its top-level initialisation when all
+        // imports start concurrently, so load the dependency chain in order.
+        const threeMod = await import(localThree);
+        const loaderMod = await import(localLoader);
+        const dracoMod = this.dracoLoaderUrl ? await import(this.dracoLoaderUrl) : null;
         if (threeMod && loaderMod && loaderMod.GLTFLoader) {
           return {
             THREE: threeMod,

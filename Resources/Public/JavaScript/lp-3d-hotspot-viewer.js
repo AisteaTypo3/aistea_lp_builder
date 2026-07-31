@@ -147,11 +147,13 @@
         throw new Error('Viewer dependencies are missing');
       }
 
-      const [threeMod, loaderMod, dracoMod] = await Promise.all([
-        import(this.threeUrl),
-        import(this.gltfLoaderUrl),
-        this.dracoLoaderUrl ? import(this.dracoLoaderUrl) : Promise.resolve(null),
-      ]);
+      // The loader modules import symbols from Three.js themselves. Loading all three
+      // modules concurrently can expose those bindings before Three.js has finished its
+      // top-level initialisation in Safari, resulting in "Cannot access 'Loader' before
+      // initialization". Keep the dependency chain explicit.
+      const threeMod = await import(this.threeUrl);
+      const loaderMod = await import(this.gltfLoaderUrl);
+      const dracoMod = this.dracoLoaderUrl ? await import(this.dracoLoaderUrl) : null;
       const THREE = (threeMod && (threeMod.default || threeMod)) || null;
       const GLTFLoader = loaderMod && loaderMod.GLTFLoader ? loaderMod.GLTFLoader : null;
 
