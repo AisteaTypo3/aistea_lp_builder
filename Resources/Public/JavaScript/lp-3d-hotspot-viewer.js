@@ -137,6 +137,9 @@
         this.observeResize();
         this.maybeToggleRenderLoop();
       } catch (error) {
+        // GLTFLoader sometimes rejects with a ProgressEvent, which has no message.
+        // Preserve it in the browser console for diagnosing failed resources.
+        console.error('3D hotspot viewer failed to load.', error);
         const message = error && error.message ? error.message : 'Unknown 3D error';
         this.setStatus(`3D load failed: ${message}`);
       }
@@ -271,6 +274,12 @@
       const loader = new GLTFLoader();
       if (DRACOLoader) {
         const dracoLoader = new DRACOLoader();
+        // Firefox intermittently fails to initialise the WASM decoder inside the
+        // Blob worker. Its JavaScript decoder uses the same verified assets and is
+        // a reliable fallback for the affected browser.
+        if (/firefox/i.test(navigator.userAgent)) {
+          dracoLoader.setDecoderConfig({ type: 'js' });
+        }
         dracoLoader.setDecoderPath(this.getDracoDecoderPath(this.dracoLoaderUrl));
         loader.setDRACOLoader(dracoLoader);
       }

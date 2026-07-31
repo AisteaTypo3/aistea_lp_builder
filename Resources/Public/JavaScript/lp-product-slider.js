@@ -584,6 +584,11 @@
         const loader = new GLTFLoader();
         if (DRACOLoader) {
           const dracoLoader = new DRACOLoader();
+          // Firefox can fail to initialise the WASM decoder in a Blob worker.
+          // Use Draco's JavaScript decoder there as a browser-specific fallback.
+          if (/firefox/i.test(navigator.userAgent)) {
+            dracoLoader.setDecoderConfig({ type: 'js' });
+          }
           dracoLoader.setDecoderPath(this.getDracoDecoderPath(this.dracoLoaderUrl));
           loader.setDRACOLoader(dracoLoader);
         }
