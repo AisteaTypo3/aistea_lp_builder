@@ -11,7 +11,9 @@ final class ContentElementPreviewRenderer extends StandardContentPreviewRenderer
 {
     public function renderPageModulePreviewContent(GridColumnItem $item): string
     {
-        $record = $item->getRecord();
+        // TYPO3 14 returns a record object, the renderers below work with the raw row
+        $recordObject = $item->getRecord();
+        $record = ($recordObject->getRawRecord() ?? $recordObject)->toArray();
         $cType = (string)($record['CType'] ?? '');
 
         return match ($cType) {
